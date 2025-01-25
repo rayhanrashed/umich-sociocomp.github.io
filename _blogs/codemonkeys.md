@@ -146,13 +146,11 @@ materials:
 
 <section id="results">
         <h2>Results by task</h2>
-        <p>We evaluate each component of our system on SWE-bench Verified:</p>
-
         <img src="/imgs/blog/codemonkeys/results_by_stage.png" alt=""  style="width: 100%; height: auto;">
         
         <div class="component-results">
             <h3>Context</h3>
-            <p>With the 128k token limit that we use for later experiments, 92.6% of instances have the correct files in context. .</p>
+            <p>With the 128k token limit, 92.6% of instances have the correct files in context.</p>
             
             <h3>Generation</h3>
             <p>By running multiple state machines in parallel and allowing each to iterate multiple times, we achieve 69.8% coverage. This means that for about 70% of problems, at least one of our candidate solutions is correct. Interestingly, we found that different ways of distributing compute between parallel scaling (more state machines) and serial scaling (more iterations per machine) often lead to similar coverage values.</p>
@@ -163,7 +161,7 @@ materials:
   </section>
 
 <section id="costs">
-<h3>Cost Analysis</h3>
+<h2>Cost Analysis</h2>
 
 <table class="cost-table">
     <thead>
