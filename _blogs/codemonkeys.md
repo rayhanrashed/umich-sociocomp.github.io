@@ -343,7 +343,7 @@ materials:
   <code style="white-space: pre">
 @misc{ehrlich2025codemonkeys,
       title={Large Language Monkeys: Scaling Inference Compute with Repeated Sampling}, 
-      author={Ryan Ehrlich and Bradley Brown and Jordan Juravsky and and Ronald Clark and Christopher Ré and Azalia Mirhoseini},
+      author={Ryan Ehrlich and Bradley Brown and Jordan Juravsky and Ronald Clark and Christopher Ré and Azalia Mirhoseini},
       year={2024},
       eprint={2407.21787},
       archivePrefix={arXiv},
