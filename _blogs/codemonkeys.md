@@ -77,7 +77,7 @@ materials:
         
         <p>Additionally, in Large Language Monkeys we generated candidate edits by repeatedly sampling from an existing framework (<a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a>) which designed for generating only a single edit.</p>
         
-        <p>This raised the question: if we were instead to build a system from scratch that was designed to solve SWE-bench instances by scaling test-time compute, what might that system look like?</p>
+        <p>This raised the question: how would we design a system differently if benefiting from test-time compute scaling was a primary consideration?</p>
     </section>
 
     <section id="codemonkeys">
@@ -106,15 +106,15 @@ dataset that are resolved by the edit our system submits.</li>
 
         <p>One of the key challenges when solving SWE-bench instances is managing the large volume of input context. Most SWE-bench codebases contain millions of tokens worth of context: this exceeds the context lengths of most available models. Further, it would be prohibitively expensive to process using frontier models.</p>
 
-        <p>We need to filter the codebases down to something that fits into current models context windows. As we generate multiple candidate solutions, we can amortize this cost of context identification across all downstream samples.</p>
+        <p>We need to filter the codebases down to something that fits into current model's context windows. As we generate multiple candidate solutions, we can amortize this cost of context identification across all downstream samples.</p>
         
-        <p>We use a simple but effective approach to find relevant files: we let a model (specifically, <a href="https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct">Qwen2.5-Coder-32B-Instruct</a>) read every Python file in the codebase in parallel and independently label each file as "relevant" or "not relevant". Then, we used <a href="https://claude.ai">Claude Sonnet-3.5</a> to rank the relevant files by importance, allowing up to 120,000 tokens of context.</p>
+        <p>We use a simple but effective approach to find relevant codebase files: we let a model (specifically, <a href="https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct">Qwen2.5-Coder-32B-Instruct</a>) read every Python file in the codebase in parallel and independently label each file as "relevant" or "not relevant". Then, we used <a href="https://claude.ai">Claude Sonnet-3.5</a> to rank the relevant files by importance, allowing up to 120,000 tokens of context.</p>
 
         <h3>Task 2: Generation</h3>
         
         <div class="component-details">
             <p><strong>Inputs:</strong> Issue Description, Relevant Files</p>
-            <p><strong>Outputs:</strong> 10 (candidate edit, candidate test) pairs</p>
+            <p><strong>Outputs:</strong> 10 (Candidate edit, Candidate test) pairs</p>
         </div>
 
         <center>
@@ -133,7 +133,7 @@ dataset that are resolved by the edit our system submits.</li>
         <h3 id="selection">Task 3: Selection</h3>
         
         <div class="component-details">
-            <p><strong>Inputs:</strong> Issue Description, Relevant Files, multiple (candidate edit, candidate test) pairs</p>
+            <p><strong>Inputs:</strong> Issue Description, Relevant Files, (Candidate edit, Candidate test) pairs</p>
             <p><strong>Outputs:</strong> Final edit to codebase</p>
         </div>
 
@@ -141,7 +141,7 @@ dataset that are resolved by the edit our system submits.</li>
           <img src="/imgs/blog/codemonkeys/selection_sm.png" alt="The selection state machine."  style="margin-top: 4px; width: 50%; height: auto;">
         </center>
 
-        <p>Finally, we select among the candidate solutions. We combine two approaches: using the model-generated tests to vote on solutions, and running a dedicated selection state machine that can write additional tests to differentiate between top candidates. Similar to the editing and testing state machines, this state machine can iterate based on execution feedback.</p> 
+        <p>Finally, we select among the candidate solutions. We combine two approaches: using the model-generated tests to vote on solutions, and running a dedicated selection state machine that can write additional tests to differentiate between top candidates. Similar to the editing and testing state machines, this state machine can refine its tests based on execution feedback.</p> 
     </section>
 
 <section id="results">
@@ -346,8 +346,8 @@ dataset that are resolved by the edit our system submits.</li>
 
 <section id="future">
 
-<h2>Limitations & Future Work</h2>
-<p>While CodeMonkeys demonstrates that scaling test-time compute is a viable approach for solving software engineering problems, there are clear opportunities for improvement across each component.</p>
+<h2>Limitations and Future Work</h2>
+<p>While CodeMonkeys demonstrates that scaling test-time compute is a viable approach for solving software engineering problems, there are clear opportunities for improvement.</p>
 
 <p>Our file-level filtering still misses relevant files in 7.4% of cases, and may have reduced effectiveness on private repositories not represented in model training data. The generation phase could incorporate additional execution feedback beyond issue reproduction tests and coordinate between parallel attempts to increase solution diversity. Most notably, there remains a significant gap between our selection performance and what would be possible with perfect selection - our best method recovers only about half of this gap when selecting CodeMonkeys solutions, and performs even less well when combining solutions from different frameworks in the Barrel of Monkeys.</p>
 
