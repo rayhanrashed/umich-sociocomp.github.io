@@ -41,9 +41,9 @@ materials:
   
 
   <p>CodeMonkeys scores 57.4% on SWE-bench Verified using Claude Sonnet 3.5.</p>
-  <p>Our <a href="#selection">candidate selection</a> method can also be used to combine candidates from different sources. Selecting over an ensemble of edits from existing top SWE-bench Verified submissions obtains a score of 66.2%, outperforms the best member of the ensemble on its own, and comes 5.5% below o3's reported score of 71.7%.</p>
+  <p>Our <a href="#selection">candidate selection</a> method can also be used to combine candidates from different sources. Selecting over an ensemble of edits from existing top SWE-bench Verified submissions obtains a score of 66.2%, outperforming the best member of the ensemble on its own and coming 5.5% below o3's reported score of 71.7%.</p>
 
-  <p>Concretely, we are releasing:</p>
+  <p>We are releasing:</p>
   <ul>
       <li><strong><a href="https://arxiv.org/abs/2501.14723">A paper</a></strong> that describes our method in more detail.</li>
       <li><strong><a href="https://github.com/scalingintelligence/codemonkeys">The CodeMonkeys codebase</a>.</strong> This includes scripts for reproducing all results from our paper and running CodeMonkeys on SWE-bench problems.</li>
@@ -64,14 +64,20 @@ materials:
   </section>
     <section id="motivation">
         <h2>Let's talk about Monkeys</h2>
-        <p>We began working on SWE-bench in our previous work, <a href="https://scalingintelligence.stanford.edu/pubs/large_language_monkeys/">Large Language Monkeys</a>. In that paper, we demonstrated a promising property of LLMs: when solving software engineering (and other) problems, coverage, the fraction of problems that are solved by at least one attempt, increases log-linearly with the number of solutions drawn from the model.</p>
+        <p>We began working on SWE-bench in our previous work, <a href="https://scalingintelligence.stanford.edu/pubs/large_language_monkeys/">Large Language Monkeys</a>. In that paper, we investigated the simple technique of using an LLM to sample many candidate solutions to a problem.</p>
         
-        <img src="/imgs/blog/monkeys/coverage.png" alt="Coverage (percent of problems solved by any sample) increases across five code and math reasoning tasks." style="width: 100%; height: auto;">
+        <p>When solving SWE-bench instances (in addition to tasks from other datasets), we found that coverage, the fraction of instances that are solved by at least one sample, often increases log-linearly with the number of samples drawn.</p>
+        
+        <p>More precisely, we found that the relationship between coverage and the number of samples can often be modeled using an exponentiated power law.</p>
+        
+        <img src="/imgs/blog/monkeys/coverage.png" alt="Coverage (percent of problems solved by any sample) increases across five coding and math reasoning tasks." style="width: 100%; height: auto;">
 
-        <p>These results showed clear potential for using how we might use test-time compute to improve performance on SWE-bench; by investing more test time compute in larger sample collections, we can steadily increase the probability that these collections contain correct solutions. However, acheiving high coverage does not mean that a system can solve SWE-bench issues with a high rate of success. Benefiting from coverage requires that a system can select a correct solution out of its collection of generations.</p>
+        <p>These results showed clear potential for how we might use test-time compute to improve performance on SWE-bench; by investing more test time compute in larger sample collections, we can steadily increase the probability that these collections contain correct solutions. However, acheiving high coverage does not mean that a system can solve SWE-bench issues with a high rate of success. Benefiting from coverage requires that a system can select a correct solution out of its collection of generations.</p>
 
         
-        <p>Additionally, in Large Language Monkeys we generated candidate edits by repeatedly sampling from an existing framework (<a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a>) which designed for generating only a single edit. This raised the question: if we were instead to build a system from scratch that was designed to solve SWE-bench instances by scaling test-time compute, what might that system look like?</p>
+        <p>Additionally, in Large Language Monkeys we generated candidate edits by repeatedly sampling from an existing framework (<a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a>) which designed for generating only a single edit.</p>
+        
+        <p>This raised the question: if we were instead to build a system from scratch that was designed to solve SWE-bench instances by scaling test-time compute, what might that system look like?</p>
     </section>
 
     <section id="codemonkeys">
@@ -338,19 +344,15 @@ dataset that are resolved by the edit our system submits.</li>
 
 </section>
 
-<section id="data">
-  <h2>Data Release & Paper</h2>
-  <p>We are releasing two datasets in addition to our paper. We hope these support future research into Software Engineering agents.</p>
-  
-  <h3><a>CodeMonkeys Trajectories</a></h3>
-  <p>Our first dataset contains the complete problem-solving trajectories from running CodeMonkeys on SWE-bench Verified. For each of the 500 problems, we release all state data. This includes all LLM outputs.</p>
+<section id="future">
 
-  <h3><a href="https://huggingface.co/datasets/ScalingIntelligence/swe-bench-verified-codebase-content">SWE-bench Codebase Content</a></h3>
-  <p>Our second dataset provides efficient access to the Python codebases required to work on SWE-bench problems. Instead of requiring researchers to manage Git repositories, this dataset contains all Python files from the relevant repositories</p>
+<h2>Limitations & Future Work</h2>
+<p>While CodeMonkeys demonstrates that scaling test-time compute is a viable approach for solving software engineering problems, there are clear opportunities for improvement across each component.</p>
 
-  <h3><a>CodeMonkeys paper</a></h3>
-  
- <p>For more details about our methods, analysis of the trade-offs between different scaling approaches, and ablation studies of our selection methods, please read our paper: <a href="#">CodeMonkeys: Scaling Test-Time Compute for Software Engineering</a>.</p>
+<p>Our file-level filtering still misses relevant files in 7.4% of cases, and may have reduced effectiveness on private repositories not represented in model training data. The generation phase could incorporate additional execution feedback beyond issue reproduction tests and coordinate between parallel attempts to increase solution diversity. Most notably, there remains a significant gap between our selection performance and what would be possible with perfect selection - our best method recovers only about half of this gap when selecting CodeMonkeys solutions, and performs even less well when combining solutions from different frameworks in the Barrel of Monkeys.</p>
+
+<p>We look forward to continued progress in methods for scaling test-time compute and their applications to real-world software engineering tasks.</p>
+
   <p>If our dataset, code, or paper was helpful to you, please consider citing:</p>
   <div style="width: 100%; overflow-x: auto">
   <code style="white-space: pre">
