@@ -55,17 +55,17 @@ materials:
 
   <section id="swebench">
       <h2>SWE-bench</h2>
-      <p><a href="https://swebench.com">SWE-bench</a> is a benchmark that measures how well AI systems can solve real-world software engineering problems. Each problem in SWE-bench consists of an actual GitHub issue from a popular open-source Python repository (like Django or Sympy) and the complete codebase at the time the issue was reported.</p>
+      <p><a href="https://swebench.com">SWE-bench</a> is a benchmark that measures how well AI systems can solve real-world GitHub issues. Each instance in SWE-bench consists of an issue from a popular open-source Python repository (like Django or SymPy) along with the complete codebase at the time the issue was reported.</p>
 
       <img src="/imgs/blog/codemonkeys/swebench.png" alt="SWE-bench problem overview." style="width: 100%; height: auto;">
         
-      <p>To solve a SWE-bench issue, systems produce an edit to the given codebase, with the goal of resolving the described issue. This edit is evaluated for correctness using unit tests from the codebase, which are hidden from the system at test-time. A model's score is simply the fraction of issues where the model's patch is marked as correct.</p>
+      <p>To solve an instance, a system must appropriately edit the given codebase in order to resolve the corresponding issue. An edit can be automatically evaluated for correctness using a set of unit tests that are hidden from the system.</p>
 
-      <p>In this work, we've focused on <a href="https://openai.com/index/introducing-swe-bench-verified/">SWE-bench Verified</a>, a subset of SWE-bench validated by human annotators.</p>
+      <p>In this work, we've focused on <a href="https://openai.com/index/introducing-swe-bench-verified/">SWE-bench Verified</a>, a subset of SWE-bench where human annotators have filtered out low-quality instances (e.g. those with ambiguous issue descriptions).</p>
   </section>
     <section id="motivation">
         <h2>Large Language Monkeys</h2>
-        <p>We first became interested in SWE-bench during our previous work, <a href="https://scalingintelligence.stanford.edu/pubs/large_language_monkeys/">Large Language Monkeys</a>. In that paper, we demonstrated a promising property of LLMs: when solving software engineering (and other) problems, coverage, the fraction of problems that are solved by at least one attempt, increases log-linearly with the number of solutions drawn from the model.</p>
+        <p>We began working on SWE-bench in our previous work, <a href="https://scalingintelligence.stanford.edu/pubs/large_language_monkeys/">Large Language Monkeys</a>. In that paper, we demonstrated a promising property of LLMs: when solving software engineering (and other) problems, coverage, the fraction of problems that are solved by at least one attempt, increases log-linearly with the number of solutions drawn from the model.</p>
         
         <img src="/imgs/blog/monkeys/coverage.png" alt="Coverage (percent of problems solved by any sample) increases across five code and math reasoning tasks." style="width: 100%; height: auto;">
 
