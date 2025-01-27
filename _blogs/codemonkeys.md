@@ -20,7 +20,7 @@ date: 2025-01-21
 teaser: 
 materials:
   - name: Paper
-    url: https://arxiv.org/
+    url: https://arxiv.org/abs/2501.14723
     type: file-pdf
   - name: CodeMonkeys Codebase
     url: https://github.com/ScalingIntelligence/codemonkeys
@@ -37,21 +37,20 @@ materials:
 
   <p>Today, we're releasing CodeMonkeys, a system designed to solve software engineering problems by scaling test-time compute.</p>
 
-  <img src="/imgs/blog/codemonkeys/system_overview.png" alt="" style="width: 100%; height: auto;">
+  <img src="/imgs/blog/codemonkeys/system_overview.png" alt="CodeMonkeys system overview. There are 3 subtasks: context, generation, and selection" style="width: 100%; height: auto;">
   
 
   <p>CodeMonkeys scores 57.4% on SWE-bench Verified using Claude Sonnet 3.5.</p>
-  <p>Further, when using CodeMonkeys' <a href="#selection">candidate selection</a> to select from an ensemble of solutions constructed from CodeMonkeys and existing top SWE-bench verified submissions, we achieve a score of 66.2%. This score outperforms all members of the ensemble and comes 5.5% below o3's reported score of 71.7%.</p>
+  <p>Our <a href="#selection">candidate selection</a> method can also be used to combine candidates from different sources. Selecting over an ensemble of edits from existing top SWE-bench Verified submissions obtains a score of 66.2%, outperforms the best member of the ensemble on its own, and comes 5.5% below o3's reported score of 71.7%.</p>
 
   <p>Concretely, we are releasing:</p>
   <ul>
+      <li><strong><a href="https://arxiv.org/abs/2501.14723">A paper</a></strong> that describes our method in more detail.</li>
       <li><strong><a href="https://github.com/scalingintelligence/codemonkeys">The CodeMonkeys codebase</a>.</strong> This includes scripts for reproducing all results from our paper and running CodeMonkeys on SWE-bench problems.</li>
-      <li><strong><a href="#">All trajectories generated while solving SWE-bench problems.</a></strong> These trajectories contain all model outputs, candidate edits, test scripts, and execution traces generated while running CodeMonkeys on SWE-bench Verified.</li>
+      <li><strong><a href="https://github.com/swe-bench/experiments/pull/171">All trajectories generated while solving SWE-bench problems.</a></strong> These trajectories contain all model outputs, candidate edits, test scripts, and execution traces generated while running CodeMonkeys on SWE-bench Verified.</li>
       <li><strong><a href="#costs">A careful accounting of the cost of running CodeMonkeys.</a></strong> Software engineering agents are expensive: running CodeMonkeys on SWE-bench Verified cost $2300 USD. </li>
       <li><strong><a href="https://huggingface.co/datasets/ScalingIntelligence/swe-bench-verified-codebase-content">A companion dataset containing complete Python codebase snapshots for all problems in SWE-bench Verified.</a></strong> This dataset makes it easier to work with SWE-bench by providing direct access to repository contents, without needing to clone and manage large Git repositories.</li>
   </ul>
-
-  <p> We'll start by <a href="#motivation">talking about monkeys</a>, transition into how this motivated the <a href="#codemonkeys">design of CodeMonkeys</a>, CodeMonkeys' <a href="#results">results on SWE-bench</a>, and end with <a href="#ensemble">ensembling for SWE-bench</a>.</p>
 
   <section id="swebench">
       <h2>SWE-bench</h2>
@@ -64,16 +63,15 @@ materials:
       <p>In this work, we've focused on <a href="https://openai.com/index/introducing-swe-bench-verified/">SWE-bench Verified</a>, a subset of SWE-bench where human annotators have filtered out low-quality instances (e.g. those with ambiguous issue descriptions).</p>
   </section>
     <section id="motivation">
-        <h2>Large Language Monkeys</h2>
+        <h2>Let's talk about Monkeys</h2>
         <p>We began working on SWE-bench in our previous work, <a href="https://scalingintelligence.stanford.edu/pubs/large_language_monkeys/">Large Language Monkeys</a>. In that paper, we demonstrated a promising property of LLMs: when solving software engineering (and other) problems, coverage, the fraction of problems that are solved by at least one attempt, increases log-linearly with the number of solutions drawn from the model.</p>
         
         <img src="/imgs/blog/monkeys/coverage.png" alt="Coverage (percent of problems solved by any sample) increases across five code and math reasoning tasks." style="width: 100%; height: auto;">
 
-        <p><strong>This means that as you spend more test time compute by drawing more samples, the fraction of problems that you have at least one correct solution for increases consistently and predictably.</strong></p>
+        <p>These results showed clear potential for using how we might use test-time compute to improve performance on SWE-bench; by investing more test time compute in larger sample collections, we can steadily increase the probability that these collections contain correct solutions. However, acheiving high coverage does not mean that a system can solve SWE-bench issues with a high rate of success. Benefiting from coverage requires that a system can select a correct solution out of its collection of generations.</p>
+
         
-        <p>While these results showed clear potential for improving performance on benchmarks like SWE-bench, we only demonstrated coverage improvements. To achieve actual performance gains, a system needs to select a correct solution from many candidates. Additionally, we generated our candidates by sampling from an existing framework (<a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a>) multiple times. Although powerful and well-built, the framework wasn't designed for taking multiple attempts per problem.</p>
-        
-        <p>This raised the question: <em>how would one design a system for solving SWE tasks differently if benefiting from test-time compute scaling was a primary consideration?</em></p>
+        <p>Additionally, in Large Language Monkeys we generated candidate edits by repeatedly sampling from an existing framework (<a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a>) which designed for generating only a single edit. This raised the question: if we were instead to build a system from scratch that was designed to solve SWE-bench instances by scaling test-time compute, what might that system look like?</p>
     </section>
 
     <section id="codemonkeys">
@@ -81,9 +79,15 @@ materials:
         <p>This question led us to build CodeMonkeys, a system designed to solve software engineering problems by scaling test-time compute. Similar to existing approaches like <a href="https://github.com/OpenAutoCoder/Agentless?tab=readme-ov-file">Agentless</a>, we decomposed solving SWE-bench issues into 3 subtasks:</p>
 
         <ol>
-            <li><strong>Context</strong>, identifying relevant codebase files.</li>
-            <li><strong>Generation</strong>, generating candidate edits and tests.</li>
-            <li><strong>Selection</strong>, selecting a final answer from a collection of edits and tests.</li>
+            <li><strong>Context:</strong> can we identify the codebase files that need to be edited and put them in the
+context window? We can measure outcome of this subtask with <strong>recall</strong>: the fraction of
+problems where all needed files have been identified.</li>
+            <li><strong>Generation</strong>: can we produce a correct codebase edit among any of our sampled candidates?
+We can measure this outcome of this subtask with <strong>coverage</strong>: the fraction of problems where
+at least one generated edit is correct.</li>
+            <li><strong>Selection</strong> can we choose a correct codebase edit from our collection of candidates? After
+completing this subtask, we can measure our final <strong>score</strong>: the fraction of problems in the
+dataset that are resolved by the edit our system submits.</li>
         </ol>
 
         <h3>Task 1: Context</h3>
@@ -94,9 +98,11 @@ materials:
             <p><strong>Outputs:</strong> Relevant Files (120,000 tokens)</p>
         </div>
 
-        <p>First, we identify relevant codebase context. As we generate multiple candidate solutions, we can amortize the cost of context identification across all downstream samples.</p>
+        <p>One of the key challenges when solving SWE-bench instances is managing the large volume of input context. Most SWE-bench codebases contain millions of tokens worth of context: this exceeds the context lengths of most available models. Further, it would be prohibitively expensive to process using frontier models.</p>
+
+        <p>We need to filter the codebases down to something that fits into current models context windows. As we generate multiple candidate solutions, we can amortize this cost of context identification across all downstream samples.</p>
         
-        <p>This lets us use a simple but effective approach: we let a model (specifically, <a href="https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct">Qwen2.5-Coder-32B-Instruct</a>) read every Python file in the codebase and label each file as "relevant" or "not relevant". Then, we used <a href="https://claude.ai">Claude Sonnet-3.5</a> to rank the relevant files by importance, allowing up to 120,000 tokens of context.</p>
+        <p>We use a simple but effective approach to find relevant files: we let a model (specifically, <a href="https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct">Qwen2.5-Coder-32B-Instruct</a>) read every Python file in the codebase in parallel and independently label each file as "relevant" or "not relevant". Then, we used <a href="https://claude.ai">Claude Sonnet-3.5</a> to rank the relevant files by importance, allowing up to 120,000 tokens of context.</p>
 
         <h3>Task 2: Generation</h3>
         
@@ -106,10 +112,17 @@ materials:
         </div>
 
         <center>
-          <img src="/imgs/blog/codemonkeys/testing_and_editing_sm.png" alt=""  style="width: 90%; height: auto; margin: auto 0;">
+          <img src="/imgs/blog/codemonkeys/testing_and_editing_sm.png" alt="The testing and editing state machine."  style="width: 90%; height: auto; margin: auto 0;">
         </center>
 
-        <p>Then, we generate candidate solutions. We run multiple parallel state machines that each generate both a codebase edit and a corresponding testing script. These state machines iteratively refine their edits and tests based on execution feedback. This provides two ways to scale test-time compute: we can increase the number of iterations per state machine ("serial scaling") or increase the number of independent state machines per problem ("parallel scaling").</p>
+        <p>We decompose this stage of our system into two back-to-back state machines:</p>
+        
+        <ol>
+            <li>An initial <strong>testing state machine</strong> which iterates on an initial draft of the test script.</li>
+            <li>A follow-up <strong>editing state machine</strong> which iterates on a codebase edit. This state machine is seeded with the output of a testing state machine and can also revise the testing script as needed.</li>
+        </ol>
+        
+        <p>These state machines iteratively refine their outputs based on execution feedback. This provides two ways to scale test-time compute: we can increase the number of iterations per state machine ("serial scaling") or increase the number of independent state machines per problem ("parallel scaling").</p>
 
         <h3 id="selection">Task 3: Selection</h3>
         
@@ -119,25 +132,25 @@ materials:
         </div>
 
         <center>
-          <img src="/imgs/blog/codemonkeys/selection_sm.png" alt=""  style="margin-top: 4px; width: 50%; height: auto;">
+          <img src="/imgs/blog/codemonkeys/selection_sm.png" alt="The selection state machine."  style="margin-top: 4px; width: 50%; height: auto;">
         </center>
 
-        <p>Finally, we select among the candidate solutions. We combine two approaches: using the model-generated tests to vote on solutions, and running a dedicated selection state machine that can write additional tests to differentiate between top candidates.</p>
+        <p>Finally, we select among the candidate solutions. We combine two approaches: using the model-generated tests to vote on solutions, and running a dedicated selection state machine that can write additional tests to differentiate between top candidates. Similar to the editing and testing state machines, this state machine can iterate based on execution feedback.</p> 
     </section>
 
 <section id="results">
         <h2>Results by task</h2>
-        <img src="/imgs/blog/codemonkeys/results_by_stage.png" alt=""  style="width: 100%; height: auto;">
+        <img src="/imgs/blog/codemonkeys/results_by_stage.png" alt="Results by stage, see paragraph below for data."  style="width: 100%; height: auto;">
         
         <div class="component-results">
             <h3>Context</h3>
             <p>With the 128k token limit, 92.6% of instances have the correct files in context. </p>
             
             <h3>Generation</h3>
-            <p>By running multiple state machines in parallel and allowing each to iterate multiple times, we achieve 69.8% coverage. This means that for about 70% of problems, at least one of our candidate solutions is correct. Notably, in our experiments, we found that different ways of distributing compute between parallel scaling (more state machines) and serial scaling (more iterations per machine) often lead to similar coverage values.</p>
+            <p>By running multiple state machines in parallel and allowing each to iterate on their answer, we achieve 69.8% coverage. This means that for about 70% of problems, at least one of our candidate solutions is correct. Notably, in our experiments, we found that different ways of distributing compute between parallel scaling (more state machines) and serial scaling (more iterations per machine) often lead to similar coverage values.</p>
             
             <h3>Selection</h3>
-            <p>Our selection method, which combines test-based voting with a dedicated selection state machine, recovers approximately half of the gap between random selection and using an oracle. This leads to a final score of 57.4%.</p>
+            <p>Our selection method, which combines test-based voting with a dedicated selection state machine, recovers approximately half of the gap between random selection (45.8%) and using an oracle (69.8%). This leads to a final score of 57.4%.</p>
         </div>
   </section>
 
@@ -261,10 +274,10 @@ materials:
 </style>
 
 
-<p>The cost breakdown reveals several insights about CodeMonkeys:</p>
+<p>There's a few things to note in our cost breakdown:</p>
 
 <ul class="cost-analysis">
-    <li>Our context identification contributes only 15% to total costs with a high recall. A simple linear scan with a small model can be quite effective! </li>
+    <li>Our context identification contributes only 15% to total costs with a high recall. A simple linear scan with a small model can work! </li>
     
     <li>Generating edits is the most expensive component (60% of costs), primarily due to cache read costs from including codebase context in prompts.</li>
     
@@ -320,14 +333,14 @@ materials:
 
   <p>When we run our selection state machine over this expanded pool of candidate solutions, we achieve a score of 66.2%. This outperforms both CodeMonkeys on its own (57.4%) and the previous best ensemble submission (62.8%), showing how our selection method can effectively identify correct solutions even when they come from different frameworks.</p>
 
-  <p>Something we took away from this is the importance of selection: with oracle selection could yield 10% gains. TODO FIX</p>
+  <!-- <p>Something we took away from this is the importance of selection: with oracle selection could yield 10% gains. TODO FIX</p> -->
 
 
 </section>
 
 <section id="data">
   <h2>Data Release & Paper</h2>
-  <p>We are releasing two complementary datasets and a paper. We hope these support different aspects of research.</p>
+  <p>We are releasing two datasets in addition to our paper. We hope these support future research into Software Engineering agents.</p>
   
   <h3><a>CodeMonkeys Trajectories</a></h3>
   <p>Our first dataset contains the complete problem-solving trajectories from running CodeMonkeys on SWE-bench Verified. For each of the 500 problems, we release all state data. This includes all LLM outputs.</p>
@@ -342,13 +355,13 @@ materials:
   <div style="width: 100%; overflow-x: auto">
   <code style="white-space: pre">
 @misc{ehrlich2025codemonkeys,
-      title={Large Language Monkeys: Scaling Inference Compute with Repeated Sampling}, 
+      title={CodeMonkeys: Scaling Test-Time Compute for Software Engineering}, 
       author={Ryan Ehrlich and Bradley Brown and Jordan Juravsky and Ronald Clark and Christopher Ré and Azalia Mirhoseini},
-      year={2024},
-      eprint={2407.21787},
+      year={2025},
+      eprint={2501.14723},
       archivePrefix={arXiv},
       primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2407.21787}, 
+      url={https://arxiv.org/abs/2501.14723}, 
 }</code>
 </div>
 </section>
