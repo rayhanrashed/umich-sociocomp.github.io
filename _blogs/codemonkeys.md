@@ -1,5 +1,5 @@
 ---
-title: "CodeMonkeys: Scaling Test-Time Compute for Software Engineering"
+title: "CodeMonkeys: Monkey SWE, Monkey Do"
 authors:
   - key: ryanehrlich
     equal: true
@@ -19,6 +19,7 @@ year: 2025
 date: 2025-01-21
 teaser: 
 materials:
+materials:
   - name: Paper
     url: https://arxiv.org/abs/2501.14723
     type: file-pdf
@@ -26,7 +27,7 @@ materials:
     url: https://github.com/ScalingIntelligence/codemonkeys
     type: code
   - name: Trajectories
-    url: 
+    url: https://github.com/swe-bench/experiments/pull/171
     type: database
   - name: Codebase Content Dataset
     url: https://huggingface.co/datasets/ScalingIntelligence/swe-bench-verified-codebase-content
@@ -57,6 +58,7 @@ materials:
       <p><a href="https://swebench.com">SWE-bench</a> is a benchmark that measures how well AI systems can solve real-world GitHub issues. Each instance in SWE-bench consists of an issue from a popular open-source Python repository (like Django or SymPy) along with the complete codebase at the time the issue was reported.</p>
 
       <img src="/imgs/blog/codemonkeys/swebench.png" alt="SWE-bench problem overview." style="width: 100%; height: auto;">
+      <p style="text-align: center; font-style: italic; margin-top: 5px;">Image from: <a href="https://arxiv.org/abs/2310.06770">https://arxiv.org/abs/2310.06770</a>.</p>
         
       <p>To solve an instance, a system must appropriately edit the given codebase in order to resolve the corresponding issue. An edit can be automatically evaluated for correctness using a set of unit tests that are hidden from the system.</p>
 
@@ -71,6 +73,7 @@ materials:
         <p>More precisely, we found that the relationship between coverage and the number of samples can often be modeled using an exponentiated power law.</p>
         
         <img src="/imgs/blog/monkeys/coverage.png" alt="Coverage (percent of problems solved by any sample) increases across five coding and math reasoning tasks." style="width: 100%; height: auto;">
+        <p style="text-align: center; font-style: italic; margin-top: 5px;">Image from: <a href="https://arxiv.org/abs/2407.21787">https://arxiv.org/abs/2407.21787</a>.</p>
 
         <p>These results showed clear potential for how we might use test-time compute to improve performance on SWE-bench; by investing more test-time compute in generating larger sample collections, we can steadily increase the probability that these collections contain correct solutions. However, acheiving high coverage does not mean that a system can solve SWE-bench issues with a high success rate. Benefiting from coverage requires that a system can select a correct solution among its candidate generations.</p>
 
