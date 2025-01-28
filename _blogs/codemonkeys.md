@@ -19,6 +19,7 @@ year: 2025
 date: 2025-01-21
 teaser: 
 materials:
+materials:
   - name: Paper
     url: https://arxiv.org/abs/2501.14723
     type: file-pdf
@@ -26,7 +27,7 @@ materials:
     url: https://github.com/ScalingIntelligence/codemonkeys
     type: code
   - name: Trajectories
-    url: 
+    url: https://github.com/swe-bench/experiments/pull/171
     type: database
   - name: Codebase Content Dataset
     url: https://huggingface.co/datasets/ScalingIntelligence/swe-bench-verified-codebase-content

@@ -24,13 +24,13 @@ tags:
 teaser: In this work, we present CodeMonkeys, a system designed to solve software engineering problems by scaling test time compute. CodeMonkeys resolves 57.4% of issues in SWE-bench Verified. When ensembling with edits from existing top SWE-bench submissions, we obtains a score of 66.2% outperforming the best member of the ensemble on its own.
 materials:
   - name: Paper
-    url: https://arxiv.org/
+    url: https://arxiv.org/abs/2501.14723
     type: file-pdf
   - name: CodeMonkeys Codebase
     url: https://github.com/ScalingIntelligence/codemonkeys
     type: code
   - name: Trajectories
-    url: 
+    url: https://github.com/swe-bench/experiments/pull/171
     type: database
   - name: Codebase Content Dataset
     url: https://huggingface.co/datasets/ScalingIntelligence/swe-bench-verified-codebase-content
