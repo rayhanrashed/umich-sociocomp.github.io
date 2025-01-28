@@ -57,25 +57,26 @@ materials:
       <p><a href="https://swebench.com">SWE-bench</a> is a benchmark that measures how well AI systems can solve real-world GitHub issues. Each instance in SWE-bench consists of an issue from a popular open-source Python repository (like Django or SymPy) along with the complete codebase at the time the issue was reported.</p>
 
       <img src="/imgs/blog/codemonkeys/swebench.png" alt="SWE-bench problem overview." style="width: 100%; height: auto;">
+      <p style="text-align: center; font-style: italic; margin-top: 5px;">Image from: <a href="https://arxiv.org/abs/2310.06770">https://arxiv.org/abs/2310.06770</a>.</p>
         
       <p>To solve an instance, a system must appropriately edit the given codebase in order to resolve the corresponding issue. An edit can be automatically evaluated for correctness using a set of unit tests that are hidden from the system.</p>
 
       <p>In this work, we've focused on <a href="https://openai.com/index/introducing-swe-bench-verified/">SWE-bench Verified</a>, a subset of SWE-bench where human annotators have filtered out low-quality instances (e.g. those with ambiguous issue descriptions).</p>
   </section>
     <section id="motivation">
-        <h2>Let's talk about Monkeys</h2>
-        <p>We began working on SWE-bench in our previous work, <a href="https://scalingintelligence.stanford.edu/pubs/large_language_monkeys/">Large Language Monkeys</a>. In that paper, we investigated the simple technique of using an LLM to sample many candidate solutions to a problem.</p>
+        <h2>Let's Talk About Monkeys</h2>
+        <p>We began working on SWE-bench in our previous work, <a href="https://arxiv.org/abs/2407.21787">Large Language Monkeys</a>. In that paper, we investigated the simple technique of using an LLM to sample many candidate solutions to a problem.</p>
         
         <p>When solving SWE-bench instances (in addition to tasks from other datasets), we found that coverage, the fraction of instances that are solved by at least one sample, often increases log-linearly with the number of samples drawn.</p>
         
         <p>More precisely, we found that the relationship between coverage and the number of samples can often be modeled using an exponentiated power law.</p>
         
         <img src="/imgs/blog/monkeys/coverage.png" alt="Coverage (percent of problems solved by any sample) increases across five coding and math reasoning tasks." style="width: 100%; height: auto;">
+        <p style="text-align: center; font-style: italic; margin-top: 5px;">Image from: <a href="https://arxiv.org/abs/2407.21787">https://arxiv.org/abs/2407.21787</a>.</p>
 
-        <p>These results showed clear potential for how we might use test-time compute to improve performance on SWE-bench; by investing more test time compute in larger sample collections, we can steadily increase the probability that these collections contain correct solutions. However, acheiving high coverage does not mean that a system can solve SWE-bench issues with a high rate of success. Benefiting from coverage requires that a system can select a correct solution out of its collection of generations.</p>
+        <p>These results showed clear potential for how we might use test-time compute to improve performance on SWE-bench; by investing more test-time compute in generating larger sample collections, we can steadily increase the probability that these collections contain correct solutions. However, acheiving high coverage does not mean that a system can solve SWE-bench issues with a high success rate. Benefiting from coverage requires that a system can select a correct solution among its candidate generations.</p>
 
-        
-        <p>Additionally, in Large Language Monkeys we generated candidate edits by repeatedly sampling from an existing framework (<a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a>) which designed for generating only a single edit.</p>
+        <p>Additionally, in Large Language Monkeys, we generated candidate edits by repeatedly sampling from an existing framework (<a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a>) which was designed for generating only a single edit.</p>
         
         <p>This raised the question: how would we design a system differently if benefiting from test-time compute scaling was a primary consideration?</p>
     </section>
@@ -88,10 +89,10 @@ materials:
             <li><strong>Context:</strong> can we identify the codebase files that need to be edited and put them in the
 context window? We can measure outcome of this subtask with <strong>recall</strong>: the fraction of
 problems where all needed files have been identified.</li>
-            <li><strong>Generation</strong>: can we produce a correct codebase edit among any of our sampled candidates?
+            <li><strong>Generation:</strong> can we produce a correct codebase edit among any of our sampled candidates?
 We can measure this outcome of this subtask with <strong>coverage</strong>: the fraction of problems where
 at least one generated edit is correct.</li>
-            <li><strong>Selection</strong> can we choose a correct codebase edit from our collection of candidates? After
+            <li><strong>Selection:</strong> can we choose a correct codebase edit from our collection of candidates? After
 completing this subtask, we can measure our final <strong>score</strong>: the fraction of problems in the
 dataset that are resolved by the edit our system submits.</li>
         </ol>
@@ -101,20 +102,20 @@ dataset that are resolved by the edit our system submits.</li>
         
         <div class="component-details">
             <p><strong>Inputs:</strong> Issue Description, Entire Codebase (up to millions of tokens of context)</p>
-            <p><strong>Outputs:</strong> Relevant Files (120,000 tokens)</p>
+            <p><strong>Outputs:</strong> Relevant Files (max of 120,000 tokens)</p>
         </div>
 
         <p>One of the key challenges when solving SWE-bench instances is managing the large volume of input context. Most SWE-bench codebases contain millions of tokens worth of context: this exceeds the context lengths of most available models. Further, it would be prohibitively expensive to process using frontier models.</p>
 
-        <p>We need to filter the codebases down to something that fits into current model's context windows. As we generate multiple candidate solutions, we can amortize this cost of context identification across all downstream samples.</p>
+        <p>We therefore need to filter the codebases down to fit in a smaller context window. Since we later sample multiple candidate edits for every SWE-bench instance, we can amortize this cost of context identification across all downstream samples.</p>
         
-        <p>We use a simple but effective approach to find relevant codebase files: we let a model (specifically, <a href="https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct">Qwen2.5-Coder-32B-Instruct</a>) read every Python file in the codebase in parallel and independently label each file as "relevant" or "not relevant". Then, we used <a href="https://claude.ai">Claude Sonnet-3.5</a> to rank the relevant files by importance, allowing up to 120,000 tokens of context.</p>
+        <p>We use a simple but effective approach to find relevant codebase files: we let a model (specifically, <a href="https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct">Qwen2.5-Coder-32B-Instruct</a>) read every non-test Python file in the codebase in parallel, labelling each file as "relevant" or "not relevant". Then, we used <a href="https://claude.ai">Claude Sonnet-3.5</a> to rank the relevant files by importance. We include the top-ranked files in the context window, allowing up to 120,000 tokens of context.</p>
 
         <h3>Task 2: Generation</h3>
         
         <div class="component-details">
             <p><strong>Inputs:</strong> Issue Description, Relevant Files</p>
-            <p><strong>Outputs:</strong> 10 (Candidate edit, Candidate test) pairs</p>
+            <p><strong>Outputs:</strong> Candidate (Edit, Test) Pairs</p>
         </div>
 
         <center>
@@ -128,20 +129,20 @@ dataset that are resolved by the edit our system submits.</li>
             <li>A follow-up <strong>editing state machine</strong> which iterates on a codebase edit. This state machine is seeded with the output of a testing state machine and can also revise the testing script as needed.</li>
         </ol>
         
-        <p>These state machines iteratively refine their outputs based on execution feedback. This provides two ways to scale test-time compute: we can increase the number of iterations per state machine ("serial scaling") or increase the number of independent state machines per problem ("parallel scaling").</p>
+        <p>These state machines iteratively refine their outputs based on execution feedback. This provides two ways to scale test-time compute: we can increase the number of iterations per state machine ("serial scaling") or increase the number of independent state machines per problem ("parallel scaling"). In our experiments, we limit all state machines to eight iterations and sample 10 candidate (edit, test) pairs per SWE-bench instance.</p>
 
         <h3 id="selection">Task 3: Selection</h3>
         
         <div class="component-details">
-            <p><strong>Inputs:</strong> Issue Description, Relevant Files, (Candidate edit, Candidate test) pairs</p>
-            <p><strong>Outputs:</strong> Final edit to codebase</p>
+            <p><strong>Inputs:</strong> Issue Description, Relevant Files, Candidate (Edit, Test) Pairs</p>
+            <p><strong>Outputs:</strong> Final Codebase Edit</p>
         </div>
 
         <center>
           <img src="/imgs/blog/codemonkeys/selection_sm.png" alt="The selection state machine."  style="margin-top: 4px; width: 50%; height: auto;">
         </center>
 
-        <p>Finally, we select among the candidate solutions. We combine two approaches: using the model-generated tests to vote on solutions, and running a dedicated selection state machine that can write additional tests to differentiate between top candidates. Similar to the editing and testing state machines, this state machine can refine its tests based on execution feedback.</p> 
+        <p>Finally, we select among the candidate solutions. We first use the model-generated tests to vote on solutions and narrow down our candidates to the top-3 edits that pass the most tests. Next, we run a dedicated selection state machine that can write additional tests to differentiate between these to p candidates and eventually decide on one. Similar to the editing and testing state machines, this state machine can refine its tests based on execution feedback from previous iterations.</p> 
     </section>
 
 <section id="results">
@@ -153,7 +154,7 @@ dataset that are resolved by the edit our system submits.</li>
             <p>With the 128k token limit, 92.6% of instances have the correct files in context. </p>
             
             <h3>Generation</h3>
-            <p>By running multiple state machines in parallel and allowing each to iterate on their answer, we achieve 69.8% coverage. This means that for about 70% of problems, at least one of our candidate solutions is correct. Notably, in our experiments, we found that different ways of distributing compute between parallel scaling (more state machines) and serial scaling (more iterations per machine) often lead to similar coverage values.</p>
+            <p>The collections of candidate edits generated by our state machines achieve 69.8% coverage. This means that for about 70% of problems, at least one of our candidate solutions is correct. Notably, in our experiments, we found that different ways of distributing compute between parallel scaling (more state machines) and serial scaling (more iterations per machine) often lead to similar coverage values.</p>
             
             <h3>Selection</h3>
             <p>Our selection method, which combines test-based voting with a dedicated selection state machine, recovers approximately half of the gap between random selection (45.8%) and using an oracle (69.8%). This leads to a final score of 57.4%.</p>
@@ -283,12 +284,10 @@ dataset that are resolved by the edit our system submits.</li>
 <p>There's a few things to note in our cost breakdown:</p>
 
 <ul class="cost-analysis">
-    <li>Our context identification contributes only 15% to total costs with a high recall. A simple linear scan with a small model can work! </li>
+    <li>Our context identification contributes only 15% to total costs - amortizing makes scanning the codebase with a small model feasible! </li>
     
-    <li>Generating edits is the most expensive component (60% of costs), primarily due to cache read costs from including codebase context in prompts.</li>
-    
-    <li>We reduce costs by separating testing and editing state machines, allowing us to omit codebase context from testing prompts.</li>
-    
+    <li>Generating edits is the most expensive component (60% of costs), primarily due to cache read costs from including lots of codebase context in prompts.</li>
+        
     <li>Selection contributes less than 10% to total costs while significantly improving final performance (see paper for ablations).</li>
 </ul>
 
