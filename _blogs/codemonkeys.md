@@ -75,7 +75,7 @@ materials:
         <img src="/imgs/blog/monkeys/coverage.png" alt="Coverage (percent of problems solved by any sample) increases across five coding and math reasoning tasks." style="width: 100%; height: auto;">
         <p style="text-align: center; font-style: italic; margin-top: 5px;">Image from: <a href="https://arxiv.org/abs/2407.21787">https://arxiv.org/abs/2407.21787</a>.</p>
 
-        <p>These results showed clear potential for how we might use test-time compute to improve performance on SWE-bench; by investing more test-time compute in generating larger sample collections, we can steadily increase the probability that these collections contain correct solutions. However, acheiving high coverage does not mean that a system can solve SWE-bench issues with a high success rate. Benefiting from coverage requires that a system can select a correct solution among its candidate generations.</p>
+        <p>These results showed clear potential for how we might use test-time compute to improve performance on SWE-bench; by investing more test-time compute in generating larger sample collections, we can steadily increase the probability that these collections contain correct solutions. However, achieving high coverage does not mean that a system can solve SWE-bench issues with a high success rate. Benefiting from coverage requires that a system can select a correct solution among its candidate generations.</p>
 
         <p>Additionally, in Large Language Monkeys, we generated candidate edits by repeatedly sampling from an existing framework (<a href="https://github.com/aorwall/moatless-tools">Moatless Tools</a>) which was designed for generating only a single edit.</p>
         
@@ -148,7 +148,7 @@ dataset that are resolved by the edit our system submits.</li>
           <img src="/imgs/blog/codemonkeys/selection_sm.png" alt="The selection state machine."  style="margin-top: 4px; width: 50%; height: auto;">
         </center>
 
-        <p>Finally, we select among the candidate solutions. We first use the model-generated tests to vote on solutions and narrow down our candidates to the top-3 edits that pass the most tests. Next, we run a dedicated selection state machine that can write additional tests to differentiate between these to p candidates and eventually decide on one. Similar to the editing and testing state machines, this state machine can refine its tests based on execution feedback from previous iterations.</p> 
+        <p>Finally, we select among the candidate solutions. We first use the model-generated tests to vote on solutions and narrow down our candidates to the top-3 edits that pass the most tests. Next, we run a dedicated selection state machine that can write additional tests to differentiate between these top candidates and eventually decide on one. Similar to the editing and testing state machines, this state machine can refine its tests based on execution feedback from previous iterations.</p> 
     </section>
 
 <section id="costs">
