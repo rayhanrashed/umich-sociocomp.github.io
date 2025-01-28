@@ -1,5 +1,5 @@
 ---
-title: "CodeMonkeys: Scaling Test-Time Compute for Software Engineering"
+title: "CodeMonkeys: Monkey SWE, Monkey Do"
 authors:
   - key: ryanehrlich
     equal: true
