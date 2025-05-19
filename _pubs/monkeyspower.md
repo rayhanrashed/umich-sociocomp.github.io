@@ -1,11 +1,11 @@
 ---
 title: 'How Do Large Language Monkeys Get Their Power (Laws)?'
 authors:
-  - key: rylanschaeffer
+  - name: rylanschaeffer
     affiliation: University of California, Berkeley
-  - key: joshuakazdan
+  - name: joshuakazdan
     affiliation: Stanford University
-  - key: johnhughes
+  - name: johnhughes
     affiliation: University of Cambridge
   - name: Jordan Juravsky
     affiliation: University of California, Berkeley
@@ -18,7 +18,6 @@ authors:
   - name: Robert Kirk
     affiliation: University of Cambridge
   - key: azaliamirhoseini
-    affiliation: Google DeepMind
   - name: Sanmi Koyejo
     affiliation: Stanford University
 venue: arXiv preprint
