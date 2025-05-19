@@ -1,15 +1,11 @@
 ---
 title: 'Think, Prune, Train, Improve: Scaling Reasoning Without Scaling Models'
 authors:
-  - name: Caia Costello
-    affiliation: Stanford University / Ceramic AI
-    email: caia@stanford.edu
-  - name: Simon Guo
-    affiliation: Stanford University
+  - key: caiacostello
+  - key: simonguo
   - name: Anna Goldie
     affiliation: Stanford University
   - key: azaliamirhoseini
-    affiliation: Google DeepMind
 venue: arXiv preprint
 year: 2025
 month: April

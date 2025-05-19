@@ -3,11 +3,8 @@ title: 'Synthetic Data Generation & Multi-Step RL for Reasoning & Tool Use'
 authors:
   - name: Anna Goldie
     affiliation: Stanford University
-    email: agoldie@cs.stanford.edu
     equal: true
-  - name: Azalia Mirhoseini
-    affiliation: Stanford University
-    email: azalia@cs.stanford.edu
+  - key: azaliamirhoseini
     equal: true
   - name: Hao Zhou
     affiliation: Google DeepMind
