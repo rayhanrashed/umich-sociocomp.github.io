@@ -14,12 +14,9 @@ has_pdf: true
 doi: 10.48550/arXiv.2504.18116
 tags:
   - machine learning
-  - language models
-  - reasoning
-  - self-improvement
-  - generative AI
-teaser: 
-  This paper introduces the Think, Prune, Train (TPT) framework, a scalable method for improving language model reasoning without increasing model size. By iteratively fine-tuning models on their own reasoning traces and applying correctness-based pruning, TPT enables smaller models to achieve performance rivaling or exceeding larger ones. Experimental results on GSM8K and CodeContests show that models like Gemma-2B and LLaMA-70B-Instruct can surpass even GPT-4o on Pass@1 accuracy through recursive self-improvement.
+  - model
+  - generative ai
+teaser: This paper introduces the Think, Prune, Train (TPT) framework, a scalable method for improving language model reasoning without increasing model size. By iteratively fine-tuning models on their own reasoning traces and applying correctness-based pruning, TPT enables smaller models to achieve performance rivaling or exceeding larger ones. Experimental results on GSM8K and CodeContests show that models like Gemma-2B and LLaMA-70B-Instruct can surpass even GPT-4o on Pass@1 accuracy through recursive self-improvement.
 materials:
   - name: Paper
     url: https://arxiv.org/abs/2504.18116
