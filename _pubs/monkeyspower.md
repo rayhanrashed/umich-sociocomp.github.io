@@ -28,11 +28,8 @@ has_pdf: true
 doi: 10.48550/arXiv.2502.17578
 tags:
   - machine learning
-  - scaling laws
-  - generative AI
-  - inference compute
-teaser: 
-  Recent research documents a surprising finding: increasing inference compute through repeated sampling reveals power-law scaling in average success rates. This occurs despite per-problem exponential scaling, explained by heavy-tailed distributions of single-attempt success rates. Our analysis unifies these observations under a mathematical framework, offering new insights into inference-time scaling laws and more efficient performance forecasting for language models.
+  - generative ai
+teaser: Recent research documents a surprising finding: increasing inference compute through repeated sampling reveals power-law scaling in average success rates. This occurs despite per-problem exponential scaling, explained by heavy-tailed distributions of single-attempt success rates. Our analysis unifies these observations under a mathematical framework, offering new insights into inference-time scaling laws and more efficient performance forecasting for language models.
 materials:
   - name: Paper
     url: https://arxiv.org/abs/2502.17578
