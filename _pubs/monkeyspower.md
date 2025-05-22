@@ -1,11 +1,11 @@
 ---
 title: 'How Do Large Language Monkeys Get Their Power (Laws)?'
 authors:
-  - name: rylanschaeffer
+  - name: Rylan Schaeffer
     affiliation: University of California, Berkeley
-  - name: joshuakazdan
+  - name: Joshua Kazdan
     affiliation: Stanford University
-  - name: johnhughes
+  - name: John Hughes
     affiliation: University of Cambridge
   - name: Jordan Juravsky
     affiliation: University of California, Berkeley
@@ -20,8 +20,9 @@ authors:
   - key: azaliamirhoseini
   - name: Sanmi Koyejo
     affiliation: Stanford University
-venue: arXiv preprint
+venue: preprint
 year: 2025
+date: 2025-02-24
 month: February
 day: 24
 has_pdf: true
@@ -29,7 +30,8 @@ doi: 10.48550/arXiv.2502.17578
 tags:
   - machine learning
   - generative ai
-teaser: Recent research documents a surprising finding: increasing inference compute through repeated sampling reveals power-law scaling in average success rates. This occurs despite per-problem exponential scaling, explained by heavy-tailed distributions of single-attempt success rates. Our analysis unifies these observations under a mathematical framework, offering new insights into inference-time scaling laws and more efficient performance forecasting for language models.
+slug: monkeyspower
+teaser: We explain how language models exhibit power-law scaling in success rates despite per-problem exponential scaling, revealing that heavy-tailed distributions of success probabilities drive this phenomenon and enabling more efficient performance forecasting.
 materials:
   - name: Paper
     url: https://arxiv.org/abs/2502.17578
