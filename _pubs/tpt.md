@@ -6,8 +6,9 @@ authors:
   - name: Anna Goldie
     affiliation: Stanford University
   - key: azaliamirhoseini
-venue: arXiv preprint
+venue: preprint
 year: 2025
+date: 2025-04-25
 month: April
 day: 25
 has_pdf: true
@@ -16,7 +17,7 @@ tags:
   - machine learning
   - model
   - generative ai
-teaser: This paper introduces the Think, Prune, Train (TPT) framework, a scalable method for improving language model reasoning without increasing model size. By iteratively fine-tuning models on their own reasoning traces and applying correctness-based pruning, TPT enables smaller models to achieve performance rivaling or exceeding larger ones. Experimental results on GSM8K and CodeContests show that models like Gemma-2B and LLaMA-70B-Instruct can surpass even GPT-4o on Pass@1 accuracy through recursive self-improvement.
+teaser: Think, Prune, Train (TPT) is a scalable framework that enables smaller language models to achieve performance rivaling larger ones through iterative self-improvement on their own reasoning traces, with experimental results showing models like Gemma-2B and LLaMA-70B-Instruct surpassing GPT-4o on reasoning tasks.
 materials:
   - name: Paper
     url: https://arxiv.org/abs/2504.18116
