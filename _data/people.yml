@@ -82,6 +82,14 @@ simonguo:
   url: https://simonguo.tech/
   title: Rotating PhD Student
 
+# Collaborating professors
+
+percyliang:
+  name: Percy Liang
+  url: https://cs.stanford.edu/~pliang/
+  title: Professor
+  not_current: True
+
 # Alumni
 
 #example:
