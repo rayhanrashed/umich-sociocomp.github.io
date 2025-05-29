@@ -11,7 +11,7 @@ tags:
 venue: none
 year: 2025
 date: 2025-05-28
-teaser: We have some very fast AI-generated kernels generated a simple test-time only search. They are performing close to or in some cases even beating the standard expert-optimized production kernels shipped in PyTorch.
+teaser: We have some very fast AI-generated kernels generated with a simple test-time only search. They are performing close to or in some cases even beating the standard expert-optimized production kernels shipped in PyTorch.
 materials:
   - name: Kernels
     url: https://github.com/ScalingIntelligence/good-kernels
