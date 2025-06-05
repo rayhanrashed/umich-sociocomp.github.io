@@ -2,13 +2,13 @@
 title: "Tokasaurus: An inference engine for high-throughput workloads"
 authors:
   - key: jordanjuravsky
-  - key: Ayush Chakravarthy
+  - name: Ayush Chakravarthy
     affiliation: Stanford University
   - key: ryanehrlich
-  - key: Sabri Eyuboglu
+  - name: Sabri Eyuboglu
     affiliation: Stanford University
   - key: bradleybrown
-  - key: Joseph Shetaye
+  - name: Joseph Shetaye
     affiliation: Stanford University
   - name: Christopher Ré
     affiliation: Stanford
