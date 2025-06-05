@@ -133,7 +133,7 @@ Also, we’re grateful to Dan Biderman, Simon Guo, Manat Kaur, and Avanika Naray
 
 ```bibtex
 @misc{juravsky2025tokasaurus,
-  author       = {},
+  author       = {Jordan Juravsky and Ayush Chakravarthy and Ryan Ehrlich and Sabri Eyuboglu and Bradley Brown and Joseph Shetaye and Christopher Ré and Azalia Zalimirhoseini},
   title        = {Tokasaurus: An Inference Engine for High-Throughput Workloads},
   year         = {2025},
   howpublished = {\url{https://scalingintelligence.stanford.edu/blogs/tokasaurus/}}
