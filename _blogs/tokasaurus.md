@@ -1,5 +1,5 @@
 ---
-title: "Tokasaurus: An Inference Engine for High-Throughput Workloads"
+title: "Tokasaurus: An LLM Inference Engine for High-Throughput Workloads"
 authors:
   - key: jordanjuravsky
   - name: Ayush Chakravarthy
@@ -19,7 +19,7 @@ tags:
 venue: none
 year: 2025
 date: 2025-06-05
-teaser: The saurus with a toke
+teaser: ""
 materials:
   - name: Codebase
     url: https://github.com/ScalingIntelligence/tokasaurus
@@ -45,7 +45,7 @@ We’re releasing Tokasaurus, a new LLM inference engine optimized for throughpu
 
 ## Intro
 
-As LLMs get smarter, faster, and cheaper, the community keeps finding new ways to use them. Our own recent work has explored using models to [scan every file in a codebase](https://arxiv.org/abs/2501.14723), [sample 10,000 attempts for math and code problems](https://arxiv.org/abs/2407.21787), and [collaborate with other models to minimize cloud costs](https://arxiv.org/abs/2502.15964). Inference is now also an important part of the training process, where we use models to [generate synthetic data](https://arxiv.org/abs/2404.14219) or as part of [RL pipelines](https://arxiv.org/abs/2504.04736) that generate and train on model completions.
+As LLMs get [smarter, faster, and cheaper,](https://www.youtube.com/watch?v=gAjR4_CbPpQ) the community keeps finding new ways to use them. Our own recent work has explored using models to [scan every file in a codebase](https://arxiv.org/abs/2501.14723), [sample 10,000 attempts for math and code problems](https://arxiv.org/abs/2407.21787), and [collaborate with other models to minimize cloud costs](https://arxiv.org/abs/2502.15964). Inference is now also an important part of the training process, where we use models to [generate synthetic data](https://arxiv.org/abs/2404.14219) or as part of [RL pipelines](https://arxiv.org/abs/2504.04736) that generate and train on model completions.
 
 Crucially, these new inference workloads look quite different than the original LLM use case of serving a chatbot. Here, we care primarily about the total time and cost required to complete a large batch of sequences, and we care much less (if at all) about the individual latency of a single generation. In other words, we want high throughput!
 
@@ -65,19 +65,19 @@ To benchmark Tokasaurus with small models, we’ll use two workloads:
   <img src="/imgs/blog/tokasaurus/monkeys.png" alt="Tokasaurus large batch sampling" style="max-width: 49%; height: auto; display: block;">
 </div>
 
-Tokasaurus outperforms vLLM and SGLang on both of these benchmarks, in particular achieving over 3x the throughput of other engines on the Large Language Monkeys workload. Two main features contribute to these wins with small models:
+Tokasaurus outperforms vLLM and SGLang on both of these benchmarks, in particular achieving over 2x the throughput of other engines on the Large Language Monkeys workload. Two main features contribute to these wins with small models:
 
 ### Minimizing CPU Overhead
 
 LLM engines perform many different tasks on the CPU, like handling web requests, tokenizing inputs/detokenizing outputs, managing KV cache allocation, and preparing inputs for the model. If these CPU-side tasks cause the GPU-side model to stall, throughput can take a [big hit](https://blog.vllm.ai/2024/09/05/perf-update.html). To avoid these stalls, inference engines commonly make many CPU-side [tasks](https://blog.vllm.ai/2024/09/05/perf-update.html) [asynchronous](https://lmsys.org/blog/2024-12-04-sglang-v0-4/): while the GPU runs a forward pass for batch N, the CPU-side of the engine post-processes the results from batch N-1 and prepares the inputs for batch N+1. 
 
-Tokasaurus goes one step further, making the CPU-side of the engine (what we call the manager) both asynchronous and adaptive. The manager’s goal is to maintain a deep queue of inputs for the model to run forward passes on. The manager monitors the size of this queue and can detect if the model is close to exhausting it (and therefore stalling). In these cases, the manager will automatically start skipping optional steps (like checking for stop strings and onboarding new sequences) until the model’s input queue is sufficiently deep again. This combination of asynchrony and adaptivity lets Tokasaurus serve small models and massive batches with much less CPU overhead.
+Tokasaurus goes one step further, making the CPU-side of the engine (what we call the manager) both asynchronous and adaptive. The manager’s goal is to maintain a deep queue of inputs for the model to run forward passes on. The manager monitors the size of this queue and can detect if the model is close to exhausting it (and therefore stalling the GPU). In these cases, the manager will automatically start skipping optional steps (like checking for stop strings and onboarding new sequences) until the model’s input queue is sufficiently deep again. This combination of asynchrony and adaptivity lets Tokasaurus serve small models with much less CPU overhead.
 
 ### Dynamic Prefix Identification and Exploration
 
-Prefix sharing comes up all the time in LLM inference — not just when repeatedly sampling like we are in the Large Language Monkeys benchmark, but also when asking many questions about a long document or reusing a system prompt across many chatbot conversations.
+Prefix sharing comes up all the time in LLM inference — not just when repeatedly sampling like in the Large Language Monkeys benchmark, but also when asking many questions about a long document or reusing a system prompt across many chatbot conversations.
 
-Shared prefixes allow attention to be computed more efficiently. We first explored this idea last year with [Hydragen](https://arxiv.org/abs/2402.05099) (aka [cascade attention](https://flashinfer.ai/2024/02/02/cascade-inference.html) and [bifurcated attention](https://arxiv.org/abs/2403.08845), but at the time we didn’t address the problem of detecting these shared prefixes in an engine where sequences are constantly starting and finishing. With Tokasaurus, we solve this detection problem by running a greedy depth-first search algorithm for every model forward pass that iteratively finds the longest shared prefixes possible. Hydragen is most impactful for small models, which spend a relatively larger fraction of total FLOPs on attention.
+Shared prefixes allow attention to be computed more efficiently. We first explored this idea last year with [Hydragen](https://arxiv.org/abs/2402.05099) (aka [cascade attention](https://flashinfer.ai/2024/02/02/cascade-inference.html) and [bifurcated attention](https://arxiv.org/abs/2403.08845)), but at the time we didn’t address the problem of detecting these shared prefixes in an engine where sequences are constantly starting and finishing. With Tokasaurus, we solve this detection problem by running a greedy depth-first search algorithm before every model forward pass that iteratively finds the longest shared prefixes possible. Hydragen is most impactful for small models, which spend a relatively larger fraction of total FLOPs on attention.
 
 ---
 
@@ -87,7 +87,7 @@ Tokasaurus can also efficiently serve bigger models across multiple GPUs! Here, 
 
 ### Pipeline Parallelism for the GPU Poor
 
-One of our original goals with Tokasaurus was to efficiently run multi-GPU inference on our lab’s L40S GPUs, which don’t have fast inter-GPU NVLink connections. Without NVLink, the communication costs incurred running TP across a node of eight GPUs are substantial. Therefore, efficient support for PP (which requires much less inter-GPU communication) was a high priority. PP needs a large batch in order to run efficiently, since batches from the manager are subdivided into microbatches that are spread out across pipeline stages. When optimizing for throughput, we’re generally already using the largest batch size that fits in GPU memory, so PP is often a natural fit for throughput-focused workloads. When benchmarking against vLLM’s pipeline implementation using Llama-3.1-70B on eight L40S GPUs, Tokasaurus improves throughput by over 2.5x:
+One of our original goals with Tokasaurus was to efficiently run multi-GPU inference on our lab’s L40S GPUs, which don’t have fast inter-GPU NVLink connections. Without NVLink, the communication costs incurred running TP across a node of eight GPUs are substantial. Therefore, efficient support for PP (which requires much less inter-GPU communication) was a high priority. PP needs a large batch in order to run efficiently, since batches from the manager are subdivided into microbatches that are spread out across pipeline stages. When optimizing for throughput, we’re generally already using the largest batch size that fits in GPU memory, so PP is often a natural fit for throughput-focused workloads. When benchmarking against vLLM’s pipeline implementation using Llama-3.1-70B on eight L40S GPUs, Tokasaurus improves throughput by over 3x:
 
 <div style="display: flex; gap: 16px; align-items: center;">
   <img src="/imgs/blog/tokasaurus/pipeline.png" alt="Tokasaurus small models" style="max-width: 98%; height: auto; display: block;">
@@ -113,7 +113,7 @@ pip install tokasaurus
 
 Currently, we support models from the Llama-3 and Qwen-2 families and support any combination of data, tensor, and pipeline parallel within a single node.
 
-Tokasaurus is written in pure Python with no custom kernels (although we do use attention and sampling ops from the excellent [FlashInfer](https://arxiv.org/abs/2501.01005) package). We hope that this makes the engine easier to fork and hack on, a la [GPT-fast](https://github.com/pytorch-labs/gpt-fast).
+Tokasaurus is written in pure Python (although we do use attention and sampling ops from the excellent [FlashInfer](https://arxiv.org/abs/2501.01005) package). We hope that this makes the engine easier to fork and hack on, à la [GPT-fast](https://github.com/pytorch-labs/gpt-fast).
 
 ## Benchmarking Details
 
@@ -123,18 +123,18 @@ We use this script from [SGLang](https://github.com/sgl-project/sglang/blob/7e25
 
 ## Acknowledgements
 
-Huge thanks to Prime Intellect and Together AI for providing us with compute for this project.
+Huge thanks to [Prime Intellect](https://www.primeintellect.ai/) and [Together AI](https://www.together.ai/) for providing us with compute for this project.
 
 Also, we’re grateful to Dan Biderman, Simon Guo, Manat Kaur, and Avanika Narayan for beta testing the engine!
 
 ---
 
-<p>How to cite? If you use our dataset or code, please cite the following paper:</p>
+<p>If you find Tokasaurus useful, please use the following citation:</p>
 
 ```bibtex
 @misc{juravsky2025tokasaurus,
-  author       = {Jordan Juravsky and Ayush Chakravarthy and Ryan Ehrlich and Sabri Eyuboglu and Bradley Brown and Joseph Shetaye and Christopher Ré and Azalia Zalimirhoseini},
-  title        = {Tokasaurus: An Inference Engine for High-Throughput Workloads},
+  author       = {Jordan Juravsky and Ayush Chakravarthy and Ryan Ehrlich and Sabri Eyuboglu and Bradley Brown and Joseph Shetaye and Christopher R{\'e} and Azalia Mirhoseini},
+  title        = {Tokasaurus: An LLM Inference Engine for High-Throughput Workloads},
   year         = {2025},
   howpublished = {\url{https://scalingintelligence.stanford.edu/blogs/tokasaurus/}}
 }
