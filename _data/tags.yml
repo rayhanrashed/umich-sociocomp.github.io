@@ -4,14 +4,11 @@
   - system
   - model
   - dataset
+  - benchmark
   - empirical study
-- # methods
-  - qualitative methods
-  - quantitative methods
-  - mixed methods
 - # domain
   - natural language processing
   - machine learning
-  - generative AI
-  - ML systems
+  - generative ai
+  - ml systems
   

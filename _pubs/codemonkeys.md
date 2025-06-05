@@ -15,23 +15,37 @@ authors:
   - key: azaliamirhoseini
 venue: preprint
 year: 2025
-day: 212
+date: 2025-01-23
 has_pdf: true
-doi: 10.48550/arXiv.2407.21787
+doi: 10.48550/arXiv.2501.14723
 tags:
   - machine learning
-  - generative AI
-teaser: CodeMonkeys is a system designed to leverage inference time compute in order to solve Github issues in the SWE-Bench Verified dataset.
+  - generative ai
+teaser: CodeMonkeys, a system designed to solve software engineering problems by scaling test time compute.
 materials:
-  - name: Paper (TODO)
-    url: 
+  - name: Paper
+    url: https://arxiv.org/abs/2501.14723
     type: file-pdf
-  - name: Codebase (TODO)
+  - name: CodeMonkeys Codebase
     url: https://github.com/ScalingIntelligence/codemonkeys
     type: code
-  - name: Trajectory Data (TODO)
-    url: 
-    type: code
-    display_name: Trajectory Data
+  - name: Trajectories
+    url: https://github.com/swe-bench/experiments/pull/171
+    type: database
+  - name: Codebase Content Dataset
+    url: https://huggingface.co/datasets/ScalingIntelligence/swe-bench-verified-codebase-content
+    type: database
+  - name: Blog post
+    url: /blogs/codemonkeys/
+    type: link
 ---
-Scaling test-time compute represents a new axis for improving LLM capabilities. However, test-time compute can be scaled in a variety of ways, and effectively combining different approaches remains an active area of research. Here, we present CodeMonkeys, a system designed to leverage test-time compute in order to solve real-world GitHub issues from the SWE-bench dataset. Our approach scales both serial and parallel test-time compute by sampling independent multi-turn trajectories that each iterate in response to execution feedback. Leveraging the ability to amortize up-front costs across multiple downstream samples, we identify relevant codebase context by simply letting a model scan every file. In order to decide among multiple candidate edits, we introduce a selection mechanism combining model-written unit tests with a final multi-turn loop dedicated to selection. Overall, CodeMonkeys solves 57.4\% of issues from SWE-bench Verified with a budget of approximately 2500 USD. When testing our selection method on an ensemble of edits from existing top submissions from the SWE-bench leaderboard, our score increases to 66.2\%.
+Scaling test-time compute is a promising axis for improving LLM capabilities.
+However, test-time compute can be scaled in a variety of ways, and effectively combining different approaches remains an active area of research.
+Here, we explore this problem in the context of solving real-world GitHub issues from the SWE-bench dataset.
+Our system (CodeMonkeys) allows models to iteratively edit a codebase by jointly developing and running a testing script alongside their draft edit.
+We sample many of these multi-turn trajectories for every issue to generate a collection of candidate edits.
+This approach lets us scale "serial" test-time compute by increasing the number of iterations per trajectory and "parallel" test-time compute by increasing the number of trajectories per problem.
+With parallel scaling, we can amortize up-front costs across multiple downstream samples, allowing us to identify relevant codebase context using the simple method of letting an LLM read every file.
+In order to select between candidate edits, we combine voting with model-generated tests with a final multi-turn trajectory dedicated to selection.
+Overall, CodeMonkeys resolves 57.7% of issues from SWE-bench Verified using a budget of approximately 2300 USD.
+Our selection method can also be used to combine candidates from different sources. Selecting over an ensemble of edits from existing top SWE-bench submissions obtains a score of 66.2% and outperforms the best member of the ensemble on its own.
