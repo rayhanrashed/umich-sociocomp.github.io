@@ -1,5 +1,5 @@
 ---
-title: "Tokasaurus: An inference engine for high-throughput workloads"
+title: "Tokasaurus: An Inference Engine for High-Throughput Workloads"
 authors:
   - key: jordanjuravsky
 tags:
@@ -8,7 +8,7 @@ tags:
 venue: none
 year: 2025
 date: 2025-06-05
-teaser:
+teaser: The saurus with a toke
 materials:
   - name: Codebase
     url: https://github.com/ScalingIntelligence/tokasaurus
@@ -100,13 +100,13 @@ Currently, we support models from the Llama-3 and Qwen-2 families and support an
 
 Tokasaurus is written in pure Python with no custom kernels (although we do use attention and sampling ops from the excellent FlashInfer [link] package). We hope that this makes the engine easier to fork and hack on, a la GPT-fast [link].
 
-## Benchmarking Details:
+## Benchmarking Details
 
 The commands for reproducing our benchmarks are available here [link]. For each benchmark, we configure all engines with the same KV cache size and maximum number of running requests. We’ve made a best effort to tune each engine’s remaining parameters. We report the average throughput across runs after completing a warmup run. For each benchmark, all engines are run on the same machine.
 
 We use this script from SGLang [link] for our ShareGPT benchmarks and this custom script [link] for the Large Language Monkeys benchmark. To standardize our benchmarking scripts and interface, all experiments send requests through the OpenAI API. We also experimented with vLLM’s Python API (i.e. `LLM.generate()`) on the Large Language Monkeys benchmark with Llama-1B and measured roughly a 5% throughput increase.
 
-## Acknowledgements:
+## Acknowledgements
 
 Huge thanks to Prime Intellect and Together AI for providing us with compute for this project.
 
@@ -117,13 +117,10 @@ Also, we’re grateful to Dan Biderman, Simon Guo, Manat Kaur, and Avanika Naray
 <p>How to cite? If you use our dataset or code, please cite the following paper:</p>
 
 ```bibtex
-@misc{brown2024largelanguagemonkeysscaling,
-      title={Large Language Monkeys: Scaling Inference Compute with Repeated Sampling}, 
-      author={Bradley Brown and Jordan Juravsky and Ryan Ehrlich and Ronald Clark and Quoc V. Le and Christopher Ré and Azalia Mirhoseini},
-      year={2024},
-      eprint={2407.21787},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2407.21787}, 
+@misc{juravsky2025tokasaurus,
+  author       = {},
+  title        = {Tokasaurus: An Inference Engine for High-Throughput Workloads},
+  year         = {2025},
+  howpublished = {\url{https://scalingintelligence.stanford.edu/blogs/tokasaurus/}}
 }
 ```
