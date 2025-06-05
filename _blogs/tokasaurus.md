@@ -37,7 +37,7 @@ We’re releasing Tokasaurus, a new LLM inference engine optimized for throughpu
 - [Intro](#intro)
 - [Optimizing Small Models](#optimizing-small-models)
 - [Optimizing Big Models](#optimizing-bigger-models)
-- [Try it Out / What’s Next](#try-it-out--whats-next)
+- [Try it Out](#try-it-out)
 - [Benchmarking Details](#benchmarking-details)
 - [Acknowledgements](#acknowledgements)
 
