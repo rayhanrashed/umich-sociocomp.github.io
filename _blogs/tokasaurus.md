@@ -89,13 +89,17 @@ Tokasaurus can also efficiently serve bigger models across multiple GPUs! Here, 
 
 One of our original goals with Tokasaurus was to efficiently run multi-GPU inference on our lab’s L40S GPUs, which don’t have fast inter-GPU NVLink connections. Without NVLink, the communication costs incurred running TP across a node of eight GPUs are substantial. Therefore, efficient support for PP (which requires much less inter-GPU communication) was a high priority. PP needs a large batch in order to run efficiently, since batches from the manager are subdivided into microbatches that are spread out across pipeline stages. When optimizing for throughput, we’re generally already using the largest batch size that fits in GPU memory, so PP is often a natural fit for throughput-focused workloads. When benchmarking against vLLM’s pipeline implementation using Llama-3.1-70B on eight L40S GPUs, Tokasaurus improves throughput by over 2.5x:
 
-![Tokasaurus pipeline parallelism](/imgs/blog/tokasaurus/pipeline.png)
+<div style="display: flex; gap: 16px; align-items: center;">
+  <img src="/imgs/blog/tokasaurus/pipeline.png" alt="Tokasaurus small models" style="max-width: 98%; height: auto; display: block;">
+</div>
 
 ### Async Tensor Parallel for the GPU Rich
 
 If you do have GPUs with NVLink (e.g. B200s and certain models of H100s and A100s), Tokasaurus has something for you too! Models in Tokasaurus can be torch compiled end-to-end, allowing us to take advantage of [Async Tensor Parallelism (Async-TP)](https://discuss.pytorch.org/t/distributed-w-torchtitan-introducing-async-tensor-parallelism-in-pytorch/209487). This is a relatively new feature in PyTorch that can overlap inter-GPU communication with other computations, partially hiding the cost of communication. In our benchmarks, we found that Async-TP adds a lot of CPU overhead to the model forward pass and only starts improving throughput with very large batch sizes (e.g. 6k+ tokens). Tokasaurus maintains torch-compiled versions of our models with and without Async-TP enabled, allowing us to automatically switch on Async-TP whenever the batch size is big enough:
 
-![Tokasaurus big models](/imgs/blog/tokasaurus/big.png)
+<div style="display: flex; gap: 16px; align-items: center;">
+  <img src="/imgs/blog/tokasaurus/big.png" alt="Tokasaurus small models" style="max-width: 98%; height: auto; display: block;">
+</div>
 
 ---
 
