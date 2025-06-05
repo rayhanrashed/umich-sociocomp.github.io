@@ -1,5 +1,5 @@
 ---
-title: "Monkey Business: a dataset of large LLM sample collections for math and code tasks"
+title: "Monkey Business: a Dataset of Large LLM Sample Collections for Math and Code Tasks"
 authors:
   - key: bradleybrown
     affiliation: University of Oxford
