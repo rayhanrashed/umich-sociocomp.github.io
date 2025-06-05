@@ -1,5 +1,5 @@
 ---
-title: "Monkey Business: a dataset of large LLM sample collections for math and code tasks"
+title: "Monkey Business: a Dataset of Large LLM Sample Collections for Math and Code Tasks"
 authors:
   - key: bradleybrown
     affiliation: University of Oxford
@@ -21,6 +21,7 @@ tags:
   - generative AI
 venue: none
 year: 2024
+date: 2024-09-01
 teaser: A monkey maybe solving SWE-bench Lite
 materials:
   - name: HF Dataset
