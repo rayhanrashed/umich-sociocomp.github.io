@@ -43,7 +43,7 @@ materials:
     url: https://github.com/HazyResearch/cartridges
     type: code
   - name: Blog post
-    url: /blogs/cartridges/
+    url: https://hazyresearch.stanford.edu/blog/2025-06-08-cartridges
     type: link
 ---
 Large language models are often used to answer queries grounded in large text corpora (e.g. codebases, legal documents, or chat histories) by placing the entire corpus in the context window and leveraging in-context learning (ICL).
