@@ -28,12 +28,17 @@ ryanehrlich:
   url: https://www.linkedin.com/in/ryan-ehrlich-68a60b11a/
   title: Researcher
 
+# Masters
+
 shloknatarajan:
   name: Shlok Natarajan
   url: https://www.linkedin.com/in/shloknatarajan/
   title: Master's Researcher
 
-# Masters
+brendanmclaughlin:
+  name: Brendan McLaughlin
+  url: https://www.brendanmclaughlin.me/
+  title: Master's Researcher
 
 # Undergrads
 
@@ -42,10 +47,10 @@ tanvirbhathal:
   url: https://www.linkedin.com/in/tanvir-bhathal/
   title: Undergraduate Student
 
-robbymanihani:
-  name: Robby Manihani
-  url: https://www.linkedin.com/in/grmanihani/
-  title: Undergraduate Student
+# robbymanihani:
+#   name: Robby Manihani
+#   url: https://www.linkedin.com/in/grmanihani/
+#   title: Undergraduate Student
 
 caiacostello:
   name: Caia Costello
