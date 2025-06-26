@@ -12,8 +12,7 @@ authors:
     affiliation: Stanford University
   - name: Tzu-Heng Huang
     affiliation: University of Wisconsin-Madison
-  - name: Brendan McLaughlin
-    affiliation: Stanford University
+  - key: brendanmclaughlin
   - key: tanvirbhathal
   - name: Shang Zhu
     affiliation: Together AI
