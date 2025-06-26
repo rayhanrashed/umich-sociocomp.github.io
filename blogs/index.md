@@ -6,7 +6,7 @@ layout: page
   <div id="content" class="pure-u-1 pure-u-md-3-4">
     <h1 class="title">Blogs</h1>
 
-    {% assign blogYears = site.blogs | group_by:"year" | sort: "date" | reverse %}
+    {% assign blogYears = site.blogs | group_by:"year" | sort: "date" %}
     {% for year in blogYears %}
       <div id="year-{{year.name}}" class="year pure-g">
         <div class="pure-u-1-3 pure-u-md-1-5"></div>
@@ -17,7 +17,13 @@ layout: page
 
       {% assign blogs = year.items | sort: 'date' | reverse %}
       {% for blog in blogs %}
-        {% assign url = blog.url | relative_url | replace: 'index.html', '' | default: blog.external_url %}
+        {% if blog.redirect %}
+          {% assign url = blog.redirect %}
+        {% elsif blog.external_url %}
+          {% assign url = blog.external_url %}
+        {% else %}
+          {% assign url = blog.url | relative_url | replace: 'index.html', '' %}
+        {% endif %}
         <div id="{{blog.slug}}" class="blog pure-g" data-blog='{{ blog | jsonify_blog }}'>
           <div class="thumbnail pure-u-1-3 pure-u-md-1-5">
             <a href="{{url}}">
