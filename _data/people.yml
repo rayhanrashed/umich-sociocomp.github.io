@@ -19,6 +19,16 @@ shayantalaei:
   url: https://www.linkedin.com/in/shayan-talaei-6b65a0229/
   title: PhD Student
 
+anneouyang:
+  name: Anne Ouyang
+  url: https://anneouyang.com/
+  title: PhD Student
+
+simonguo:
+  name: Simon Guo
+  url: https://simonguo.tech/
+  title: PhD Student
+
 jackykwok:
   name: Jacky Kwok
   url: https://www.linkedin.com/in/jackykwok02/
@@ -85,17 +95,6 @@ lukelee:
   title: Undergraduate Collaborator
   affiliation: University College London
   not_current: True
-
-# Rotating
-anneouyang:
-  name: Anne Ouyang
-  url: https://anneouyang.com/
-  title: Rotating PhD Student
-
-simonguo:
-  name: Simon Guo
-  url: https://simonguo.tech/
-  title: Rotating PhD Student
 
 # Collaborating professors
 
