@@ -2,7 +2,7 @@
 title: "KernelBench v0.1"
 authors:
   - key: nataliakokoromyti
-  - key: soksereyrun
+  - key: soksereysun
   - key: anneouyang
   - key: azaliamirhoseini
 tags:
