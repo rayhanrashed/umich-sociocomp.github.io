@@ -8,6 +8,8 @@ jordanjuravsky:
   name: Jordan Juravsky
   url: https://www.jordanjuravsky.com/
   title: PhD Student
+  alumni: true
+  next: On Leave at Meta Superintelligence Lab
 
 jonsaadfalcon:
   name: Jon Saad-Falcon
@@ -23,6 +25,8 @@ anneouyang:
   name: Anne Ouyang
   url: https://anneouyang.com/
   title: PhD Student
+  alumni: true
+  next: On Leave at Standard Kernel Co.
 
 simonguo:
   name: Simon Guo
@@ -34,12 +38,19 @@ jackykwok:
   url: https://www.linkedin.com/in/jackykwok02/
   title: PhD Student
 
-# Visiting
+hermannkumbong:
+  name: Hermann Kumbong
+  url: https://www.linkedin.com/in/hermannkumbong/
+  title: PhD Student
 
 bradleybrown:
   name: Bradley Brown
   url: https://www.bradbrown.ca/
-  title: Visiting Student Researcher
+  title: PhD Student
+
+# Visiting
+
+# None for now
 
 # Researchers
 
@@ -47,6 +58,8 @@ ryanehrlich:
   name: Ryan Ehrlich
   url: https://www.linkedin.com/in/ryan-ehrlich-68a60b11a/
   title: Researcher
+  alumni: true
+  next: Meta Superintelligence Lab
 
 # Masters
 
@@ -59,6 +72,7 @@ brendanmclaughlin:
   name: Brendan McLaughlin
   url: https://www.brendanmclaughlin.me/
   title: Master's Researcher
+  alumni: true
 
 # Undergrads
 
@@ -75,7 +89,9 @@ tanvirbhathal:
 caiacostello:
   name: Caia Costello
   url: https://www.linkedin.com/in/caia-costello-5b4064216
-  title: Undergraduate Student
+  title: Master's Researcher
+  alumni: true
+  next: Lambda
 
 adriangamarralafuente:
   name: Adrian Gamarra Lafuente

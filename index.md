@@ -53,7 +53,7 @@ home: true
         {% endunless %}
       {% endfor %}
     </div>
-    <!-- <h3 id="alumni-header">Alumni</h3>
+    <h3 id="alumni-header">Alumni</h3>
     <ul id="alumni" class="pure-g">
       {% assign alumni = site.data.people | filter_alumni: true | sort_people: 'PhD, Postdoctoral, Scientist' %}
       {% for person in alumni  %}
@@ -75,7 +75,7 @@ home: true
           </a>
         </li>
       {% endfor %}
-    </ul> -->
+    </ul>
   </div>
 </div>
 
