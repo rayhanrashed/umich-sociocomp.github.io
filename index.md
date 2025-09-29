@@ -40,16 +40,35 @@ home: true
 
     <h2 id="people-header">People</h2>
     <div id="people" class="pure-g">
-      {% assign members = site.data.people | filter_alumni: nil | sort_people: 'Professor, PhD, Visiting, Researcher, Undergraduate Student', false %}
+      {% assign members = site.data.people | filter_alumni: nil | sort_people: 'Professor, PhD, Visiting, Researcher', false %}
       {% for person in members %}
         {% unless person[1].not_current %}
-          <div id="{{person[0]}}" class="person pure-u-1-4">
-            <a href="{{person[1].url}}">
-              <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
-              <p class="name">{{person[1].name}}</p>
-              <p class="title">{{person[1].title}}</p>
-            </a>
-          </div>
+          {% unless person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}
+            <div id="{{person[0]}}" class="person pure-u-1-4">
+              <a href="{{person[1].url}}">
+                <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
+                <p class="name">{{person[1].name}}</p>
+                <p class="title">{{person[1].title}}</p>
+                {% if person[1].note %}
+                  <p class="note" style="font-size: 0.85em; color: #666; margin-top: 2px;">{{person[1].note}}</p>
+                {% endif %}
+              </a>
+            </div>
+          {% endunless %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+
+    <h3 id="students-header">Masters & Undergraduate Researchers</h3>
+    <div id="students" class="pure-g">
+      {% assign students = site.data.people | filter_alumni: nil %}
+      {% for person in students %}
+        {% unless person[1].not_current %}
+          {% if person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}
+            <div class="person-name pure-u-1-3" style="margin-bottom: 10px;">
+              <a href="{{person[1].url}}">{{person[1].name}}</a>
+            </div>
+          {% endif %}
         {% endunless %}
       {% endfor %}
     </div>

@@ -15,11 +15,14 @@ jonsaadfalcon:
   name: Jon Saad-Falcon
   url: https://jonsaadfalcon.com/
   title: PhD Student
+  note: Coadvised with Christopher Ré
+
 
 shayantalaei:
   name: Shayan Talaei
   url: https://www.linkedin.com/in/shayan-talaei-6b65a0229/
   title: PhD Student
+  note: Coadvised with Amin Saberi
 
 anneouyang:
   name: Anne Ouyang
@@ -37,11 +40,14 @@ jackykwok:
   name: Jacky Kwok
   url: https://www.linkedin.com/in/jackykwok02/
   title: PhD Student
+  note: Coadvised with Marco Pavone
 
 hermannkumbong:
   name: Hermann Kumbong
   url: https://www.linkedin.com/in/hermannkumbong/
   title: PhD Student
+  note: Coadvised with Christopher Ré
+
 
 bradleybrown:
   name: Bradley Brown
@@ -63,6 +69,11 @@ ryanehrlich:
 
 # Masters
 
+williamhu:
+  name: William Hu
+  url: https://www.linkedin.com/in/williamh20/
+  title: Master's Researcher
+
 shloknatarajan:
   name: Shlok Natarajan
   url: https://www.linkedin.com/in/shloknatarajan/
@@ -73,18 +84,15 @@ brendanmclaughlin:
   url: https://www.brendanmclaughlin.me/
   title: Master's Researcher
   alumni: true
+  next: Reflection AI
 
 # Undergrads
+
 
 tanvirbhathal:
   name: Tanvir Bhathal
   url: https://www.linkedin.com/in/tanvir-bhathal/
   title: Undergraduate Student
-
-# robbymanihani:
-#   name: Robby Manihani
-#   url: https://www.linkedin.com/in/grmanihani/
-#   title: Undergraduate Student
 
 caiacostello:
   name: Caia Costello
@@ -106,6 +114,11 @@ nataliakokoromyti:
 soksereysun:
   name: Sokserey Sun
   url: https://www.linkedin.com/in/sokserey-sun-a6a442219/
+  title: Undergraduate Student
+
+kesavanramakrishnan:
+  name: Kesavan Ramakrishnan
+  url: https://www.linkedin.com/in/kesavan-ramakrishnan/
   title: Undergraduate Student
 
 je-yong:
