@@ -6,7 +6,7 @@ authors:
   - name: Anna Goldie
     affiliation: Stanford University
   - key: azaliamirhoseini
-venue: preprint
+venue: lad
 year: 2025
 date: 2025-04-25
 month: April

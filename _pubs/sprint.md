@@ -16,7 +16,7 @@ authors:
     affiliation: Stanford University
   - key: azaliamirhoseini
     affiliation: Stanford University
-venue: preprint
+venue: neurips
 year: 2025
 date: 2025-06-06
 has_pdf: true

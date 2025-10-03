@@ -26,7 +26,7 @@ authors:
     affiliation: Stanford University
   - name: Christopher Ré
     affiliation: Stanford University
-venue: preprint
+venue: neurips
 year: 2025
 date: 2025-06-24
 has_pdf: true

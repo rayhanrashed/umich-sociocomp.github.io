@@ -20,7 +20,7 @@ authors:
   - key: azaliamirhoseini
   - name: Sanmi Koyejo
     affiliation: Stanford University
-venue: preprint
+venue: icml
 year: 2025
 date: 2025-02-24
 month: February
