@@ -11,7 +11,7 @@ home: true
     <ul>
       <li>For students interested in working in the lab, please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSemsYIAG1wUpGgclG1eaQxDNYxPHB5VZzLl9eRRFsT6NPa_0A/viewform">the following form</a>.</li>
       <li>If you are a prospective PhD student: please indicate your interest in working with Prof. Mirhoseini in the Stanford CS PhD online application form, as well as in your research statement. We admit new PhD students each year. Please do not contact us directly regarding PhD applications until admission decisions are out, as we will not be able to reply to emails from individual applicants.</li>
-      <li>If you are a postdoc candidate: we currently have a joint postdoc position available. For information on how to apply, please visit <a href="https://docs.google.com/document/d/1SBfvFhLF4hSseTBybXRKJeRFMxqw4ahQ9f4Cf5Vbl7I/edit#heading=h.v7myj1tz6zo">here</a>.</li>
+      <li>If you are a postdoc candidate, please reach out directly to Prof. Mirhoseini.</li>
     </ul>
   </p>
 
@@ -19,11 +19,12 @@ home: true
   <div id="themes" class="pure-u-1 pure-u-md-3-5">
     <h2>Research Themes</h2>
     {% for theme in site.data.research_themes %}
-      <div id="theme-{{theme.key}}" class="theme" data-url="{{theme.url}}" data-people="{{theme.people}}">
+      <div id="theme-{{theme.key}}" class="theme" data-url="{{theme.url}}" data-people="{{theme.people}}" style="cursor: default;">
         <!-- <img src="/themes/{{theme.key}}.png" style="max-width: 100%; height: auto; display: block; margin-top: 0;"> -->
           <div style="padding-top: 0px; border-radius: 5px; margin-bottom: 0px;">
             <div class="content">
-              <h3>{{theme.name}}</h3>
+              <!-- disable link highlight as we don't have page to point to yet -->
+              <h3 style="pointer-events: none;">{{theme.name}}</h3>
               {{theme.desc | markdownify}}
             </div>
           </div>
@@ -40,7 +41,7 @@ home: true
 
     <h2 id="people-header">People</h2>
     <div id="people" class="pure-g">
-      {% assign members = site.data.people | filter_alumni: nil | sort_people: 'Professor, PhD, Visiting, Researcher', false %}
+      {% assign members = site.data.people | filter_alumni: nil | sort_people: 'Professor, PhD, Visiting, Researcher', true %}
       {% for person in members %}
         {% unless person[1].not_current %}
           {% unless person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}

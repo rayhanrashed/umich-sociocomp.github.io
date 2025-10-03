@@ -371,10 +371,21 @@ We would like to thank Aaryan Singhal, AJ Root, Allen Nie, Anjiang Wei, Benjamin
 
 # Citing
 ```bibtex
+@misc{ouyang2025kernelbenchllmswriteefficient,
+      title={KernelBench: Can LLMs Write Efficient GPU Kernels?}, 
+      author={Anne Ouyang and Simon Guo and Simran Arora and Alex L. Zhang and William Hu and Christopher Ré and Azalia Mirhoseini},
+      year={2025},
+      eprint={2502.10517},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2502.10517}, 
+}
+```
+
+<!-- old blog, replaced with paper arxiv
 @misc{ouyang2024kernelbench,
       title={KernelBench: Can LLMs Write GPU Kernels?}, 
       author={Anne Ouyang and Simon Guo and Azalia Mirhoseini},
       year={2024},
       url={https://scalingintelligence.stanford.edu/blogs/kernelbench/}, 
-}
-```
+} -->
