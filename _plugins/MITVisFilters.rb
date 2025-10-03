@@ -22,7 +22,12 @@ module MITVisFilters
 
     head = filter_titles(input, titles).to_a
     if sort_head
-      head = namesort(head)
+      # Separate on_leave from active people, but keep original order
+      active = head.select { |key, value| !value['on_leave'] }
+      on_leave = head.select { |key, value| value['on_leave'] }
+      
+      # Keep original order, just put on_leave at the end
+      head = active + on_leave
     end
 
     tail = namesort(filter_titles(input, titles, true))

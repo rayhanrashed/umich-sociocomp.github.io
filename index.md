@@ -73,25 +73,11 @@ home: true
       {% endfor %}
     </div>
     <h3 id="alumni-header">Alumni</h3>
-    <ul id="alumni" class="pure-g">
+    <ul id="alumni" class="pure-g" style="list-style: none; padding: 0; text-align: left;">
       {% assign alumni = site.data.people | filter_alumni: true | sort_people: 'PhD, Postdoctoral, Scientist' %}
       {% for person in alumni  %}
-        <li id="{{person[0]}}" class="person pure-u-1-2">
-          <a href="{{person[1].url}}">
-            <span class="headshot">
-              <img src="/imgs/people/{{person[0]}}.jpg" alt="" />
-            </span>
-            <span>
-              <span class="name">{{person[1].name}}</span><br> 
-              <span class="title">
-                {{person[1].title}}
-                {% if person[1].next %}
-                  <br>
-                  &rdca; {{person[1].next}}
-                {% endif %}
-              </span>              
-            </span>
-          </a>
+        <li id="{{person[0]}}" class="person pure-u-1-2" style="margin-bottom: 8px;">
+          <a href="{{person[1].url}}" style="border-bottom: none; display: inline;">{{person[1].name}}</a>{% if person[1].next %} ({{person[1].next}}){% endif %}
         </li>
       {% endfor %}
     </ul>

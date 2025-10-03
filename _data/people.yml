@@ -8,8 +8,8 @@ jordanjuravsky:
   name: Jordan Juravsky
   url: https://www.jordanjuravsky.com/
   title: PhD Student
-  alumni: true
-  next: On Leave at Meta Superintelligence Lab
+  note: On Leave at Meta Superintelligence Lab
+  on_leave: true
 
 jonsaadfalcon:
   name: Jon Saad-Falcon
@@ -28,8 +28,8 @@ anneouyang:
   name: Anne Ouyang
   url: https://anneouyang.com/
   title: PhD Student
-  alumni: true
-  next: On Leave at Standard Kernel Co.
+  note: On Leave at Standard Kernel Co.
+  on_leave: true
 
 simonguo:
   name: Simon Guo
@@ -53,6 +53,14 @@ bradleybrown:
   name: Bradley Brown
   url: https://www.bradbrown.ca/
   title: PhD Student
+
+annagoldie:
+  name: Anna Goldie
+  url: https://www.annagoldie.com/
+  title: PhD Student
+  note: Coadvised with Christopher D. Manning
+  alumni: true
+  next: Google DeepMind
 
 # Visiting
 
@@ -121,6 +129,27 @@ kesavanramakrishnan:
   url: https://www.linkedin.com/in/kesavan-ramakrishnan/
   title: Undergraduate Student
 
+
+agambhatia:
+  name: Agam Bhatia
+  url: http://agu18dec.github.io/
+  title: Undergraduate Student
+
+herumbshandilya:
+  name: Herumb Shandilya
+  url: https://www.herumbshandilya.com/
+  title: Master's Student
+
+orhunakengin:
+  name: Orhun Akengin
+  url: https://www.linkedin.com/in/akenginorhun/
+  title: Undergraduate Student
+
+rebeccajoseph:
+  name: Rebecca Joseph
+  url: https://www.linkedin.com/in/rebecca-jjoseph/
+  title: Undergraduate Student
+
 je-yong:
   name: Je-Yong Lee
   url: https://www.linkedin.com/in/jeyong-lee-523ba2258/?originalSubdomain=uk
@@ -154,6 +183,13 @@ ionstoica:
   url: https://people.eecs.berkeley.edu/~istoica/
   title: Professor
   not_current: True
+
+aakankshash:
+    name: Aakanksha Chowdhery
+    url: https://www.achowdhery.com/
+    title: Adjunct Professor
+    not_current: True
+
 # Alumni
 
 #example:
