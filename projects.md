@@ -1,7 +1,7 @@
 ---
 layout: page
-title: Projects
-permalink: /projects/
+title: Openings
+permalink: /openings/
 ---
 
 <style>
@@ -27,14 +27,16 @@ permalink: /projects/
 </style>
 
 <div class="projects-container">
-  <h1>Available Lab Projects</h1>
-  <p>Browse our project list below:</p>
+  <h1>Lab Project Openings</h1>
+  <p>Every quarter we have a few opportunities to join ongoing research projects. If you are an undergraduate or master's student at Stanford, please look through the projects below and directly reach out to the PhD student contact listed.</p>
   
+  <iframe class="airtable-embed" src="https://airtable.com/embed/appLMX0SkZPXrixRY/shrydVPBrX3XzAGxC?viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+  <!--   
   <iframe class="airtable-embed"
     src="https://airtable.com/embed/shrXXXXXXXXXXXX"
     frameborder="0"
     width="100%"
-    height="600">
-  </iframe>
+    height="600"> 
+  </iframe> -->
 </div>
 
