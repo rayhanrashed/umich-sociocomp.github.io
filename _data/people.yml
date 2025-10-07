@@ -8,21 +8,28 @@ jordanjuravsky:
   name: Jordan Juravsky
   url: https://www.jordanjuravsky.com/
   title: PhD Student
+  note: On Leave at Meta Superintelligence Lab
+  on_leave: true
 
 jonsaadfalcon:
   name: Jon Saad-Falcon
   url: https://jonsaadfalcon.com/
   title: PhD Student
+  note: Coadvised with Christopher Ré
+
 
 shayantalaei:
   name: Shayan Talaei
   url: https://www.linkedin.com/in/shayan-talaei-6b65a0229/
   title: PhD Student
+  note: Coadvised with Amin Saberi
 
 anneouyang:
   name: Anne Ouyang
   url: https://anneouyang.com/
   title: PhD Student
+  note: On Leave at Standard Kernel Co.
+  on_leave: true
 
 simonguo:
   name: Simon Guo
@@ -33,13 +40,31 @@ jackykwok:
   name: Jacky Kwok
   url: https://www.linkedin.com/in/jackykwok02/
   title: PhD Student
+  note: Coadvised with Marco Pavone
 
-# Visiting
+hermannkumbong:
+  name: Hermann Kumbong
+  url: https://www.linkedin.com/in/hermannkumbong/
+  title: PhD Student
+  note: Coadvised with Christopher Ré
+
 
 bradleybrown:
   name: Bradley Brown
   url: https://www.bradbrown.ca/
-  title: Visiting Student Researcher
+  title: PhD Student
+
+annagoldie:
+  name: Anna Goldie
+  url: https://www.annagoldie.com/
+  title: PhD Student
+  note: Coadvised with Christopher D. Manning
+  alumni: true
+  next: Google DeepMind
+
+# Visiting
+
+# None for now
 
 # Researchers
 
@@ -47,8 +72,15 @@ ryanehrlich:
   name: Ryan Ehrlich
   url: https://www.linkedin.com/in/ryan-ehrlich-68a60b11a/
   title: Researcher
+  alumni: true
+  next: Meta Superintelligence Lab
 
 # Masters
+
+williamhu:
+  name: William Hu
+  url: https://www.linkedin.com/in/williamh20/
+  title: Master's Researcher
 
 shloknatarajan:
   name: Shlok Natarajan
@@ -59,23 +91,23 @@ brendanmclaughlin:
   name: Brendan McLaughlin
   url: https://www.brendanmclaughlin.me/
   title: Master's Researcher
+  alumni: true
+  next: Reflection AI
 
 # Undergrads
+
 
 tanvirbhathal:
   name: Tanvir Bhathal
   url: https://www.linkedin.com/in/tanvir-bhathal/
   title: Undergraduate Student
 
-# robbymanihani:
-#   name: Robby Manihani
-#   url: https://www.linkedin.com/in/grmanihani/
-#   title: Undergraduate Student
-
 caiacostello:
   name: Caia Costello
   url: https://www.linkedin.com/in/caia-costello-5b4064216
-  title: Undergraduate Student
+  title: Master's Researcher
+  alumni: true
+  next: Lambda Labs
 
 adriangamarralafuente:
   name: Adrian Gamarra Lafuente
@@ -90,6 +122,32 @@ nataliakokoromyti:
 soksereysun:
   name: Sokserey Sun
   url: https://www.linkedin.com/in/sokserey-sun-a6a442219/
+  title: Undergraduate Student
+
+kesavanramakrishnan:
+  name: Kesavan Ramakrishnan
+  url: https://www.linkedin.com/in/kesavan-ramakrishnan/
+  title: Undergraduate Student
+
+
+agambhatia:
+  name: Agam Bhatia
+  url: http://agu18dec.github.io/
+  title: Undergraduate Student
+
+herumbshandilya:
+  name: Herumb Shandilya
+  url: https://www.herumbshandilya.com/
+  title: Master's Student
+
+orhunakengin:
+  name: Orhun Akengin
+  url: https://www.linkedin.com/in/akenginorhun/
+  title: Undergraduate Student
+
+rebeccajoseph:
+  name: Rebecca Joseph
+  url: https://www.linkedin.com/in/rebecca-jjoseph/
   title: Undergraduate Student
 
 je-yong:
@@ -125,6 +183,13 @@ ionstoica:
   url: https://people.eecs.berkeley.edu/~istoica/
   title: Professor
   not_current: True
+
+aakankshash:
+    name: Aakanksha Chowdhery
+    url: https://www.achowdhery.com/
+    title: Adjunct Professor
+    not_current: True
+
 # Alumni
 
 #example:

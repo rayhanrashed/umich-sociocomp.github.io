@@ -1,0 +1,14 @@
+- key: cs329a
+  name: CS329A - Self-Improving AI Agents
+  url: https://cs329a.stanford.edu/
+  people:
+  desc: >
+    This course covers the latest techniques and applications of AI agents that can continuously improve themselves through interaction with themselves and the environment. 
+    
+- key: cs229s
+  name: CS229S - Systems for Machine Learning
+  url: https://cs229s.stanford.edu/fall2024/
+  people:
+  desc: >
+    This course focuses on performance efficiency and scalability of deep learning systems, covering efficient training, fine-tuning, and inference with an emphasis on Transformer architectures and LLMs.
+

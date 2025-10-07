@@ -11,7 +11,7 @@ authors:
   - name: Quoc Le
   - name: Geoffrey Hinton
   - name: Jeff Dean
-venue: preprint
+venue: iclr
 year: 2017
 date: 2017-01-23
 has_pdf: false

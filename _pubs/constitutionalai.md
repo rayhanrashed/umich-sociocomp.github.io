@@ -53,7 +53,7 @@ authors:
   - name: Tom Brown
   - name: Jared Kaplan
 
-venue: preprint
+venue: anthropic
 year: 2022
 date: 2022-12-15
 has_pdf: false

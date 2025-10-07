@@ -9,9 +9,10 @@ home: true
 <p id="ad">
     <h2><strong><b>Prospective Students and Postdocs:</b></strong></h2>
     <ul>
-      <li>For students interested in working in the lab, please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSemsYIAG1wUpGgclG1eaQxDNYxPHB5VZzLl9eRRFsT6NPa_0A/viewform">the following form</a>.</li>
+      <li>For Stanford students interested in working in the lab, please check out <a href="/openings">project openings</a> and reach out to the project lead.</li>    
+      <!-- <li>For students interested in working in the lab, please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSemsYIAG1wUpGgclG1eaQxDNYxPHB5VZzLl9eRRFsT6NPa_0A/viewform">the following form</a>.</li> -->
       <li>If you are a prospective PhD student: please indicate your interest in working with Prof. Mirhoseini in the Stanford CS PhD online application form, as well as in your research statement. We admit new PhD students each year. Please do not contact us directly regarding PhD applications until admission decisions are out, as we will not be able to reply to emails from individual applicants.</li>
-      <li>If you are a postdoc candidate: we currently have a joint postdoc position available. For information on how to apply, please visit <a href="https://docs.google.com/document/d/1SBfvFhLF4hSseTBybXRKJeRFMxqw4ahQ9f4Cf5Vbl7I/edit#heading=h.v7myj1tz6zo">here</a>.</li>
+      <li>If you are a postdoc candidate, please reach out directly to Prof. Mirhoseini.</li>
     </ul>
   </p>
 
@@ -19,12 +20,25 @@ home: true
   <div id="themes" class="pure-u-1 pure-u-md-3-5">
     <h2>Research Themes</h2>
     {% for theme in site.data.research_themes %}
-      <div id="theme-{{theme.key}}" class="theme" data-url="{{theme.url}}" data-people="{{theme.people}}">
+      <div id="theme-{{theme.key}}" class="theme" data-url="{{theme.url}}" data-people="{{theme.people}}" style="cursor: default;">
         <!-- <img src="/themes/{{theme.key}}.png" style="max-width: 100%; height: auto; display: block; margin-top: 0;"> -->
           <div style="padding-top: 0px; border-radius: 5px; margin-bottom: 0px;">
             <div class="content">
-              <h3>{{theme.name}}</h3>
+              <!-- disable link highlight as we don't have page to point to yet -->
+              <h3 style="pointer-events: none;">{{theme.name}}</h3>
               {{theme.desc | markdownify}}
+            </div>
+          </div>
+      </div>
+    {% endfor %}
+
+    <h2 style="margin-top: 2em;">Courses</h2>
+    {% for course in site.data.courses %}
+      <div id="course-{{course.key}}" class="theme" style="cursor: pointer;" onclick="window.open('{{course.url}}', '_blank')">
+          <div style="padding-top: 0px; border-radius: 5px; margin-bottom: 0px;">
+            <div class="content">
+              <h3>{{course.name}}</h3>
+              {{course.desc | markdownify}}
             </div>
           </div>
       </div>
@@ -40,42 +54,68 @@ home: true
 
     <h2 id="people-header">People</h2>
     <div id="people" class="pure-g">
-      {% assign members = site.data.people | filter_alumni: nil | sort_people: 'Professor, PhD, Visiting, Researcher, Undergraduate Student', false %}
+      {% assign members = site.data.people | filter_alumni: nil | sort_people: 'Professor, PhD, Visiting, Researcher', true %}
       {% for person in members %}
         {% unless person[1].not_current %}
-          <div id="{{person[0]}}" class="person pure-u-1-4">
-            <a href="{{person[1].url}}">
-              <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
-              <p class="name">{{person[1].name}}</p>
-              <p class="title">{{person[1].title}}</p>
-            </a>
-          </div>
+          {% unless person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}
+            {% unless person[1].on_leave %}
+              <div id="{{person[0]}}" class="person pure-u-1-4">
+                <a href="{{person[1].url}}">
+                  <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
+                  <p class="name">{{person[1].name}}</p>
+                  <p class="title">{{person[1].title}}</p>
+                  {% if person[1].note %}
+                    <p class="note" style="font-size: 0.85em; color: #666; margin-top: 2px;">{{person[1].note}}</p>
+                  {% endif %}
+                </a>
+              </div>
+            {% endunless %}
+          {% endunless %}
+        {% endunless %}
+      {% endfor %}
+      <div class="pure-u-1" style="height: 0;"></div>
+      {% for person in members %}
+        {% unless person[1].not_current %}
+          {% unless person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}
+            {% if person[1].on_leave %}
+              <div id="{{person[0]}}" class="person pure-u-1-4">
+                <a href="{{person[1].url}}">
+                  <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
+                  <p class="name">{{person[1].name}}</p>
+                  <p class="title">{{person[1].title}}</p>
+                  {% if person[1].note %}
+                    <p class="note" style="font-size: 0.85em; color: #666; margin-top: 2px;">{{person[1].note}}</p>
+                  {% endif %}
+                </a>
+              </div>
+            {% endif %}
+          {% endunless %}
         {% endunless %}
       {% endfor %}
     </div>
-    <!-- <h3 id="alumni-header">Alumni</h3>
-    <ul id="alumni" class="pure-g">
+
+    <h3 id="students-header">Masters & Undergraduate Researchers</h3>
+    <div id="students" class="pure-g">
+      {% assign students = site.data.people | filter_alumni: nil %}
+      {% for person in students %}
+        {% unless person[1].not_current %}
+          {% if person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}
+            <div class="person-name pure-u-1-3" style="margin-bottom: 10px;">
+              <a href="{{person[1].url}}">{{person[1].name}}</a>
+            </div>
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+    <h3 id="alumni-header">Alumni</h3>
+    <ul id="alumni" class="pure-g" style="list-style: none; padding: 0; text-align: left;">
       {% assign alumni = site.data.people | filter_alumni: true | sort_people: 'PhD, Postdoctoral, Scientist' %}
       {% for person in alumni  %}
-        <li id="{{person[0]}}" class="person pure-u-1-2">
-          <a href="{{person[1].url}}">
-            <span class="headshot">
-              <img src="/imgs/people/{{person[0]}}.jpg" alt="" />
-            </span>
-            <span>
-              <span class="name">{{person[1].name}}</span><br> 
-              <span class="title">
-                {{person[1].title}}
-                {% if person[1].next %}
-                  <br>
-                  &rdca; {{person[1].next}}
-                {% endif %}
-              </span>              
-            </span>
-          </a>
+        <li id="{{person[0]}}" class="person pure-u-1-2" style="margin-bottom: 8px;">
+          <a href="{{person[1].url}}" style="border-bottom: none; display: inline;">{{person[1].name}}</a> ({{person[1].title}}{% if person[1].next %}, Next: {{person[1].next}}{% endif %})
         </li>
       {% endfor %}
-    </ul> -->
+    </ul>
   </div>
 </div>
 

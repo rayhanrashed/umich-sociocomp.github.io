@@ -11,7 +11,7 @@ authors:
   - name: Mo Tiwari
     affiliation: Stanford University
   - key: azaliamirhoseini
-venue: preprint
+venue: colm
 year: 2024
 date: 2024-04-26
 has_pdf: true

@@ -14,7 +14,7 @@ authors:
   - name: Anna Goldie
     affiliation: Google Brain
   - key: azaliamirhoseini
-venue: preprint
+venue: asplos
 year: 2021
 date: 2021-05-26
 has_pdf: false

@@ -17,7 +17,7 @@ authors:
     affiliation: Stanford University
   - key: marcopavone
     affiliation: Stanford, NVIDIA
-venue: preprint
+venue: corl
 year: 2025
 date: 2025-06-21
 has_pdf: true

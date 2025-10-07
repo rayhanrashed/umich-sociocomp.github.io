@@ -13,7 +13,7 @@ authors:
   - name: Mohammad Norouzi
   - name: Samy Bengio
   - name: Jeff Dean
-venue: preprint
+venue: icml
 year: 2017
 date: 2017-06-13
 has_pdf: false

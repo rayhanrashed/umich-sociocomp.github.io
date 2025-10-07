@@ -14,7 +14,7 @@ authors:
   - name: Christopher Ré
     affiliation: Stanford
   - key: azaliamirhoseini
-venue: preprint
+venue: icml
 year: 2025
 date: 2025-02-18
 has_pdf: true

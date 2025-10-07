@@ -7,7 +7,7 @@ authors:
   - name: Joseph Gonzalez
   - name: Ion Stoica
   - key: azaliamirhoseini
-venue: preprint
+venue: date
 year: 2022
 date: 2022-05-22
 has_pdf: false

@@ -13,7 +13,7 @@ authors:
   - name: Anna Goldie
   - key: azaliamirhoseini
   - name: James Laudon
-venue: preprint
+venue: neurips
 year: 2020
 date: 2020-02-20
 has_pdf: false

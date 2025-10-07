@@ -1,146 +1,3 @@
-visxai:
-  short: VISxAI
-  full: IEEE VIS Workshop on Visualization for AI Explainability
-  bibtex:
-    type: misc
-    venue: booktitle
-visactivities:
-  short: VIS Activities Workshop
-  full: IEEE VIS Workshop on Data Vis Activities to Facilitate Learning, Reflecting,
-    Discussing, and Designing
-  bibtex:
-    type: misc
-    venue: booktitle
-convivial-salon:
-  short: Convivial Computing Salon
-  full: The Convivial Computing Salon at &lt;Programming&gt;
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-vis-short:
-  short: VIS
-  full: IEEE Visualization Conference (VIS)
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-vis-full:
-  short: VIS
-  full: IEEE Transactions on Visualization & Computer Graphics (Proc. IEEE VIS)
-  bibtex:
-    type: article
-    venue: journal
-vis-posters:
-  short: VIS Posters
-  full: IEEE VIS Posters
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-infovis:
-  short: InfoVis
-  full: IEEE Transactions on Visualization & Computer Graphics (Proc. IEEE InfoVis)
-  bibtex:
-    type: article
-    venue: journal
-infovis-posters:
-  short: InfoVis Posters
-  full: IEEE InfoVis Posters
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-eurovis:
-  short: EuroVis
-  full: Computer Graphics Forum (Proc. EuroVis)
-  bibtex:
-    type: article
-    venue: journal
-uist:
-  short: UIST
-  full: ACM User Interface Software & Technology (UIST)
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-chi:
-  short: CHI
-  full: ACM Human Factors in Computing Systems (CHI)
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-chi-ea:
-  short: CHI EA
-  full: Extended Abstracts of ACM Human Factors in Computing Systems (CHI)
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-tei-wip:
-  short: TEI WIP
-  full: Work-in-Progress of ACM Tangible, Embedded, and Embodied Interaction (TEI)
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-stanford-cstr:
-  short: Stanford CSTR
-  full: Stanford Computer Science Technical Report
-  bibtex:
-    type: misc
-    venue: institute
-iui:
-  short: IUI
-  full: ACM Intelligent User Interfaces (IUI)
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-openvis:
-  short: OpenVis
-  full: OpenVis Conf
-distill:
-  short: Distill
-  full: Distill Journal
-  bibtex:
-    type: article
-    venue: journal
-kdd:
-  short: KDD
-  full: ACM Knowledge Discovery and Data Mining (KDD)
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-rethinking-interaction:
-  full: 'Rethinking Interaction: From Instrumental Interaction to Human-Computer Partnerships. ACM CHI'
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-aaai:
-  full: AAAI Conference on Artificial Intelligence
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-plateau:
-  full: PLATEAU Workshop at the Intersection of PL and HCI
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-facct:
-  full: ACM Conference on Fairness, Accountability, and Transparency (FAccT)
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-acl:
-  full: The Annual Meeting of the Association for Computational Linguistics (ACL)
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-live:
-  short: Live Programming
-  full: The Live Programming Workshop at SPLASH
-  bibtex:
-    type: inproceedings
-    venue: booktitle
-mit-genai:
-  short: MIT GenAI Impact Papers
-  full: An MIT Exploration of Generative AI
-  bibtex:
-    type: article
-    venue: publisher
 preprint:
   short: Preprint
   full: Preprint
@@ -153,3 +10,108 @@ colm:
   bibtex:
     type: inproceedings
     venue: booktitle
+neurips:
+  short: NeurIPS
+  full: Conference on Neural Information Processing Systems
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+icml:
+  short: ICML
+  full: International Conference on Machine Learning
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+iclr:
+  short: ICLR
+  full: International Conference on Learning Representations
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+mlsys:
+  short: MLSys
+  full: Conference on Machine Learning and Systems
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+aaai:
+  full: AAAI Conference on Artificial Intelligence
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+tmlr:
+  full: Transactions on Machine Learning Research
+  bibtex: 
+    type: article
+    venue: publisher
+cvpr:
+  short: CVPR
+  full: IEEE/CVF Conference on Computer Vision and Pattern Recognition
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+iccv:
+  short: ICCV
+  full: IEEE/CVF International Conference on Computer Vision
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+eccv:
+  short: ECCV
+  full: European Conference on Computer Vision
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+emnlp:
+  short: EMNLP
+  full: Conference on Empirical Methods in Natural Language Processing
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+naacl:
+  short: NAACL
+  full: North American Chapter of the Association for Computational Linguistics
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+acl:
+  full: The Annual Meeting of the Association for Computational Linguistics
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+corl:
+  full: Conference on Robot Learning
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+lad:
+  full: International Conference on LLM-Aided Design
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+asplos:
+  full: International Conference on Architectural Support for Programming Languages and Operating Systems
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+date:
+  full: Design, Automation and Test in Europe Conference and Exhibition
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+nature:
+  full: Nature
+  bibtex:
+    type: article
+    venue: publisher
+anthropic:
+  full: Anthropic
+  bibtex:
+    type: article
+    venue: publisher
+arxiv:
+  short: arXiv
+  full: arXiv preprint
+  bibtex:
+    type: misc
+    venue: publisher
