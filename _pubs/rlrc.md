@@ -7,7 +7,7 @@ authors:
   - key: azaliamirhoseini
   - name: Joseph E. Gonzalez
   - name: Ion Stocia
-venue: preprint
+venue: neurips
 year: 2021
 date: 2021-01-21
 has_pdf: true

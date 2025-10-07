@@ -24,7 +24,7 @@ authors:
   - name: Roger Carpenter
   - name: Jeff Dean
 
-venue: preprint
+venue: nature
 year: 2021
 date: 2021-04-13
 has_pdf: false

@@ -58,16 +58,37 @@ home: true
       {% for person in members %}
         {% unless person[1].not_current %}
           {% unless person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}
-            <div id="{{person[0]}}" class="person pure-u-1-4">
-              <a href="{{person[1].url}}">
-                <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
-                <p class="name">{{person[1].name}}</p>
-                <p class="title">{{person[1].title}}</p>
-                {% if person[1].note %}
-                  <p class="note" style="font-size: 0.85em; color: #666; margin-top: 2px;">{{person[1].note}}</p>
-                {% endif %}
-              </a>
-            </div>
+            {% unless person[1].on_leave %}
+              <div id="{{person[0]}}" class="person pure-u-1-4">
+                <a href="{{person[1].url}}">
+                  <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
+                  <p class="name">{{person[1].name}}</p>
+                  <p class="title">{{person[1].title}}</p>
+                  {% if person[1].note %}
+                    <p class="note" style="font-size: 0.85em; color: #666; margin-top: 2px;">{{person[1].note}}</p>
+                  {% endif %}
+                </a>
+              </div>
+            {% endunless %}
+          {% endunless %}
+        {% endunless %}
+      {% endfor %}
+      <div class="pure-u-1" style="height: 0;"></div>
+      {% for person in members %}
+        {% unless person[1].not_current %}
+          {% unless person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}
+            {% if person[1].on_leave %}
+              <div id="{{person[0]}}" class="person pure-u-1-4">
+                <a href="{{person[1].url}}">
+                  <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
+                  <p class="name">{{person[1].name}}</p>
+                  <p class="title">{{person[1].title}}</p>
+                  {% if person[1].note %}
+                    <p class="note" style="font-size: 0.85em; color: #666; margin-top: 2px;">{{person[1].note}}</p>
+                  {% endif %}
+                </a>
+              </div>
+            {% endif %}
           {% endunless %}
         {% endunless %}
       {% endfor %}

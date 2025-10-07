@@ -9,7 +9,7 @@ authors:
   - name: Benoit Steiner
   - name: Quoc V. Le
   - name: Jeff Dean
-venue: preprint
+venue: iclr
 year: 2018
 date: 2018-02-15
 has_pdf: false

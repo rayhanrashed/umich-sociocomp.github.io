@@ -94,6 +94,21 @@ asplos:
   bibtex:
     type: inproceedings
     venue: booktitle
+date:
+  full: Design, Automation and Test in Europe Conference and Exhibition
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+nature:
+  full: Nature
+  bibtex:
+    type: article
+    venue: publisher
+anthropic:
+  full: Anthropic
+  bibtex:
+    type: article
+    venue: publisher
 arxiv:
   short: arXiv
   full: arXiv preprint
