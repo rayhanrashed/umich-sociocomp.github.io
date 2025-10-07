@@ -74,10 +74,29 @@
   border-bottom: 1px solid rgba($csail-orange, 0.5);
 }
 
+#students {
+  .person-name {
+    padding-right: 1em;
+  }
+
+  a {
+    color: #000;
+    
+    &:hover {
+      color: #333;
+      text-decoration: underline;
+    }
+  }
+}
+
 #alumni {
   margin: 0;
   padding: 0;
   list-style: none;
+
+  li {
+    padding-right: 1em;
+  }
 
   li a {
     display: flex;
@@ -85,6 +104,12 @@
     text-align: left;
     padding: 0.5em 0 0.25em 0;
     border-bottom: 1px solid rgba($csail-orange, 0.5);
+    color: #000;
+
+    &:hover {
+      color: #333;
+      text-decoration: underline;
+    }
 
     .name {
       font-weight: normal;

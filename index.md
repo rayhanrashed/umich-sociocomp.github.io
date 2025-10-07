@@ -31,6 +31,18 @@ home: true
           </div>
       </div>
     {% endfor %}
+
+    <h2 style="margin-top: 2em;">Courses</h2>
+    {% for course in site.data.courses %}
+      <div id="course-{{course.key}}" class="theme" style="cursor: pointer;" onclick="window.open('{{course.url}}', '_blank')">
+          <div style="padding-top: 0px; border-radius: 5px; margin-bottom: 0px;">
+            <div class="content">
+              <h3>{{course.name}}</h3>
+              {{course.desc | markdownify}}
+            </div>
+          </div>
+      </div>
+    {% endfor %}
   </div>
 
   <div class="pure-u-1 pure-u-md-2-5">
@@ -79,7 +91,7 @@ home: true
       {% assign alumni = site.data.people | filter_alumni: true | sort_people: 'PhD, Postdoctoral, Scientist' %}
       {% for person in alumni  %}
         <li id="{{person[0]}}" class="person pure-u-1-2" style="margin-bottom: 8px;">
-          <a href="{{person[1].url}}" style="border-bottom: none; display: inline;">{{person[1].name}}</a>{% if person[1].next %} ({{person[1].next}}){% endif %}
+          <a href="{{person[1].url}}" style="border-bottom: none; display: inline;">{{person[1].name}}</a> ({{person[1].title}}{% if person[1].next %}, Next: {{person[1].next}}{% endif %})
         </li>
       {% endfor %}
     </ul>
