@@ -54,13 +54,8 @@ bradleybrown:
   url: https://www.bradbrown.ca/
   title: PhD Student
 
-annagoldie:
-  name: Anna Goldie
-  url: https://www.annagoldie.com/
-  title: PhD Student
-  note: Coadvised with Christopher D. Manning
-  alumni: true
-  next: Google DeepMind
+
+# Let's put a collaborator section in future PRs
 
 # Visiting
 
@@ -95,6 +90,11 @@ brendanmclaughlin:
   next: Reflection AI
 
 # Undergrads
+
+hangookang:
+  name: Hangoo Kang
+  url: https://hgkang02.github.io/
+  title: Master's Researcher
 
 
 tanvirbhathal:
