@@ -1,14 +1,14 @@
-- key: cs329a
-  name: CS329A - Self-Improving AI Agents
-  url: https://cs329a.stanford.edu/
+- key: cs593
+  name: CSE 593. Human-Computer Interaction
+  url: https://cs593.umich.edu/
   people:
   desc: >
-    This course covers the latest techniques and applications of AI agents that can continuously improve themselves through interaction with themselves and the environment. 
+    Principles and methods of technical Human-Computer Interaction (HCI) research.
     
-- key: cs229s
-  name: CS229S - Systems for Machine Learning
-  url: https://cs229s.stanford.edu/fall2024/
+- key: cse598-012
+  name: CSE 598 - Social Computing Systems
+  url: https://cs598-012.umich.edu/
   people:
   desc: >
-    This course focuses on performance efficiency and scalability of deep learning systems, covering efficient training, fine-tuning, and inference with an emphasis on Transformer architectures and LLMs.
+    This course will teach the design, development, and study of computing systems that mediate, facilitate, or augment social interactions.
 

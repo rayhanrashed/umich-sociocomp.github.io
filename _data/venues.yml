@@ -68,6 +68,30 @@ emnlp:
   bibtex:
     type: inproceedings
     venue: booktitle
+chi:
+  short: CHI
+  full: ACM CHI Conference on Human Factors in Computing Systems
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+cscw:
+  short: CSCW
+  full: ACM Conference on Computer-Supported Cooperative Work and Social Computing
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+uist:
+  short: UIST
+  full: ACM Symposium on User Interface Software and Technology
+  bibtex:
+    type: inproceedings
+    venue: booktitle
+tochi:
+  short: TOCHI
+  full: ACM Transactions on Computer-Human Interaction
+  bibtex:
+    type: article
+    venue: journal
 naacl:
   short: NAACL
   full: North American Chapter of the Association for Computational Linguistics
@@ -115,3 +139,10 @@ arxiv:
   bibtex:
     type: misc
     venue: publisher
+
+icwsm:
+  short: ICWSM
+  full: AAAI Conference on Web and Social Media
+  bibtex:
+    type: inproceedings
+    venue: booktitle

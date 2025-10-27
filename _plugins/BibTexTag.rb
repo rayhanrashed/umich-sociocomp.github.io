@@ -36,7 +36,15 @@ module Jekyll
 
       bibtex = venues[venue]['bibtex']
 
-      author_str = authors.map{|a| a['name'] || people[a['key']]['name']}.join(' and ')
+      author_str = authors.map do |a|
+        if a['name']
+          a['name']
+        elsif a['key'] && people[a['key']]
+          people[a['key']]['name']
+        else
+          raise "Missing person key '#{a['key']}' in page '#{slug}' (#{title})"
+        end
+      end.join(' and ')
       doi_str = doi ? "\n  doi = {#{doi}}," : ''
       url_str = doi ? "\n  url = {https://arxiv.org/abs/#{doi.split('arXiv.').last}}," : ''
 

@@ -3,16 +3,16 @@ layout: page
 home: true
 ---
 <p id="mission">
-  We develop <strong>scalable and self-improving AI systems and methodologies towards the goal of AGI</strong>, leveraging techniques in machine learning, systems, natural language processing, and beyond.
+  We work toward <strong>human-centered social computing systems that respect individual agency and values</strong>, leveraging techniques in machine learning, natural language processing, and human-computer interaction.
 </p>
 
 <p id="ad">
     <h2><strong><b>Prospective Students and Postdocs:</b></strong></h2>
     <ul>
-      <li>For Stanford students interested in working in the lab, please check out <a href="/openings">project openings</a> and reach out to the project lead.</li>    
+      <li>For Michigan students interested in working in the lab, please check out <a href="/openings">project openings</a> and reach out to the project lead.</li>    
       <!-- <li>For students interested in working in the lab, please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLSemsYIAG1wUpGgclG1eaQxDNYxPHB5VZzLl9eRRFsT6NPa_0A/viewform">the following form</a>.</li> -->
-      <li>If you are a prospective PhD student: please indicate your interest in working with Prof. Mirhoseini in the Stanford CS PhD online application form, as well as in your research statement. We admit new PhD students each year. Please do not contact us directly regarding PhD applications until admission decisions are out, as we will not be able to reply to emails from individual applicants.</li>
-      <li>If you are a postdoc candidate, please reach out directly to Prof. Mirhoseini.</li>
+      <li>If you are a prospective PhD student: please indicate your interest in working with Prof. Jahanbakhsh in the UMICH CSE PhD application, as well as in your research statement. We admit new PhD students each year. Please do not contact us directly regarding PhD applications until admission decisions are out, as we will not be able to reply to emails from individual applicants.</li>
+      <li>If you are a postdoc candidate, please reach out directly to Prof. Jahanbakhsh.</li>
     </ul>
   </p>
 
