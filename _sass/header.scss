@@ -11,17 +11,18 @@
     &:hover { text-decoration: none; }
   }
 
-  #logo svg {
-    height: 60px;
-    width: 80px;
-    margin-top: -10px;
-    margin-right: 20px;
+  #logo img {
+    height: 40px;
+    width: auto;
+    margin-top: -5px;
+    margin-right: 10px;
   }
 
   h1 {
     margin: 0;
     font-weight: bold;
     white-space: nowrap;
+    color: #022545; // Michigan Blue
 
     span {
       display: inline-block;
@@ -40,9 +41,9 @@
   @include for-md-down {
     padding-bottom: 0.5em;
 
-    #logo svg {
+    #logo img {
       height: 40px;
-      width: 60px;
+      width: auto;
       margin-top: 0;
       margin-right: 0.5em;
     }
