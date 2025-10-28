@@ -27,7 +27,7 @@ layout: page
         <div id="{{blog.slug}}" class="blog pure-g" data-blog='{"id":"{{blog.slug}}","title":"{{blog.title | escape}}","year":{{blog.year}},"type":"{{blog.type}}","tags":[{% for tag in blog.tags %}"{{tag | downcase}}"{% unless forloop.last %},{% endunless %}{% endfor %}],"authors":[{% for author in blog.authors %}{% assign person = site.data.people[author.key] %}"{{author.name | default: person.name | escape}}"{% unless forloop.last %},{% endunless %}{% endfor %}]}'>
           <div class="thumbnail pure-u-1-3 pure-u-md-1-5">
             <a href="{{url}}">
-              <img src="/imgs/thumbs/{{blog.slug}}.png" alt="" />
+              <img src="{{site.baseurl}}/imgs/thumbs/{{blog.slug}}.png" alt="" />
             </a>
           </div>
 

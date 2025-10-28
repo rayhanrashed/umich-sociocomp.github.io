@@ -54,14 +54,21 @@ home: true
 
     <h2 id="people-header">People</h2>
     <div id="people" class="pure-g">
-      {% assign members = site.data.people | filter_alumni: nil | sort_people: 'Professor, PhD, Visiting, Researcher', true %}
+      {% assign all_people = site.data.people %}
+      {% assign non_alumni = "" | split: "" %}
+      {% for person in all_people %}
+        {% unless person[1].alumni %}
+          {% assign non_alumni = non_alumni | push: person %}
+        {% endunless %}
+      {% endfor %}
+      {% assign members = non_alumni %}
       {% for person in members %}
         {% unless person[1].not_current %}
           {% unless person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}
             {% unless person[1].on_leave %}
               <div id="{{person[0]}}" class="person pure-u-1-4">
                 <a href="{{person[1].url}}">
-                  <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
+                  <p class="headshot"><img src="{{site.baseurl}}/imgs/people/{{person[0]}}.jpg" alt="" /></p>
                   <p class="name">{{person[1].name}}</p>
                   <p class="title">{{person[1].title}}</p>
                   {% if person[1].note %}
@@ -80,7 +87,7 @@ home: true
             {% if person[1].on_leave %}
               <div id="{{person[0]}}" class="person pure-u-1-4">
                 <a href="{{person[1].url}}">
-                  <p class="headshot"><img src="/imgs/people/{{person[0]}}.jpg" alt="" /></p>
+                  <p class="headshot"><img src="{{site.baseurl}}/imgs/people/{{person[0]}}.jpg" alt="" /></p>
                   <p class="name">{{person[1].name}}</p>
                   <p class="title">{{person[1].title}}</p>
                   {% if person[1].note %}
@@ -96,7 +103,7 @@ home: true
 
     <h3 id="students-header">Masters & Undergraduate Researchers</h3>
     <div id="students" class="pure-g">
-      {% assign students = site.data.people | filter_alumni: nil %}
+      {% assign students = non_alumni %}
       {% for person in students %}
         {% unless person[1].not_current %}
           {% if person[1].title contains 'Master' or person[1].title contains 'Undergraduate' %}
@@ -109,7 +116,13 @@ home: true
     </div>
     <h3 id="alumni-header">Alumni</h3>
     <ul id="alumni" class="pure-g" style="list-style: none; padding: 0; text-align: left;">
-      {% assign alumni = site.data.people | filter_alumni: true | sort_people: 'PhD, Postdoctoral, Scientist' %}
+      {% assign all_people = site.data.people %}
+      {% assign alumni = "" | split: "" %}
+      {% for person in all_people %}
+        {% if person[1].alumni %}
+          {% assign alumni = alumni | push: person %}
+        {% endif %}
+      {% endfor %}
       {% for person in alumni  %}
         <li id="{{person[0]}}" class="person pure-u-1-2" style="margin-bottom: 8px;">
           <a href="{{person[1].url}}" style="border-bottom: none; display: inline;">{{person[1].name}}</a> ({{person[1].title}}{% if person[1].next %}, Next: {{person[1].next}}{% endif %})

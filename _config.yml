@@ -23,7 +23,7 @@ email: farnaz@umich.edu
 description: >- # this means to ignore newlines until "baseurl:"
 
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://socialcomputing.michigan.edu" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://rayhanrashed.github.io/umich-sociocomp.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 logo: /imgs/MICHIGAN.png
 twitter:
   username: umich_hci
