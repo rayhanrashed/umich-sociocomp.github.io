@@ -30,7 +30,7 @@ permalink: /openings/
   <h1>Lab Project Openings</h1>
   <p>Every quarter we have a few opportunities to join ongoing research projects. If you are an undergraduate or master's student at UMich, please look through the projects below and directly reach out to the PhD student contact listed.</p>
   
-  <iframe class="airtable-embed" src="https://airtable.com/embed/appLMX0SkZPXrixRY/shrydVPBrX3XzAGxC?viewControls=on" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+  <iframe class="airtable-embed" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTlkyRNBL2nzpbsjDHcoQRLwC8ytdom0E1Q61wSSzK2k3Nw-21ajfMfDchpvpK3xi0Rw_tQTa_8_IEO/pubhtml?widget=true&amp;headers=false" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
   <!--   
   <iframe class="airtable-embed"
     src="https://airtable.com/embed/shrXXXXXXXXXXXX"

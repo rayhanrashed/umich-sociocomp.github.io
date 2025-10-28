@@ -154,7 +154,23 @@
               <a id="bib-download" class="bib" href="#" title="Download Bibtex"><i class="far fa-arrow-alt-circle-down" aria-hidden="true"></i></a>
             </h4>
             {% assign bib = site.data.venues[page.venue].bibtex %}
-            <pre><code id="bibtex">{% bibtex %}</code></pre>
+            {% assign author_list = "" %}
+            {% for author in page.authors %}
+              {% assign person = site.data.people[author.key] %}
+              {% if forloop.first %}
+                {% assign author_list = author.name | default: person.name %}
+              {% else %}
+                {% assign author_list = author_list | append: " and " | append: author.name | default: person.name %}
+              {% endif %}
+            {% endfor %}
+            <pre><code id="bibtex">@{{bib.type}}{{page.year}}{{page.slug | replace: '-', '' | replace: '_', ''}},
+  title = {{page.title}}},
+  author = {{author_list}}},
+  {{bib.venue}} = {{site.data.venues[page.venue].full}}},
+  year = {{page.year}}},{% if page.doi %}
+  doi = {{page.doi}}},
+  url = {https://arxiv.org/abs/{{page.doi | split: 'arXiv.' | last}}},{% endif %}
+}</code></pre>
           {% endunless %}
 
           {% if page.videos.size > 0 %}

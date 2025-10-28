@@ -66,6 +66,22 @@ plugins:
 # For latex support
 markdown: kramdown
 
+# Jekyll Scholar configuration
+scholar:
+  style: ieee
+  locale: en
+  sort_by: year
+  order: descending
+  source: ./_bibliography
+  bibliography: papers.bib
+  bibliography_template: bib
+  replace_strings: true
+  join_strings: true
+  details_dir: bibliography
+  details_layout: bibtex.html
+  details_link: Details
+  query: "@*"
+
 # Dates are used to sort publications, and we will likely upload
 # publications before their conferences occur.
 future: true

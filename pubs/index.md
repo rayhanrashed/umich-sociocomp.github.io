@@ -24,7 +24,7 @@ layout: page
         {% else %}
           {% assign url = pub.url | relative_url | replace: 'index.html', '' %}
         {% endif %}
-        <div id="{{pub.slug}}" class="pub pure-g" data-pub='{{ pub | jsonify_pub }}'>
+        <div id="{{pub.slug}}" class="pub pure-g" data-pub='{"id":"{{pub.slug}}","title":"{{pub.title | escape}}","year":{{pub.year}},"type":"{{pub.type}}","tags":[{% for tag in pub.tags %}"{{tag | downcase}}"{% unless forloop.last %},{% endunless %}{% endfor %}],"authors":[{% for author in pub.authors %}{% assign person = site.data.people[author.key] %}"{{author.name | default: person.name | escape}}"{% unless forloop.last %},{% endunless %}{% endfor %}]}'>
           <div class="thumbnail pure-u-1-3 pure-u-md-1-5">
             <a href="{{url}}">
               <img src="/imgs/thumbs/{{pub.slug}}.png" alt="" />
